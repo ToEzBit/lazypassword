@@ -5,7 +5,29 @@ import (
 	"strings"
 
 	"github.com/jroimartin/gocui"
+	"github.com/toezbit/lazypassword/constants"
 )
+
+var padding = 1
+
+func WorkSpace(g *gocui.Gui) {
+	maxX, maxY := g.Size()
+	v, _ := g.SetView(constants.WorkSpace, 0, 0, maxX/2-padding, maxY/2)
+	v.Title = " Work Space "
+
+}
+
+func AccountList(g *gocui.Gui) {
+	maxX, maxY := g.Size()
+	v, _ := g.SetView(constants.AccountList, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
+	v.Title = " Account List "
+}
+
+func AccountDetail(g *gocui.Gui) {
+	maxX, maxY := g.Size()
+	v, _ := g.SetView(constants.AccountdDetail, maxX/2+padding, 0, maxX-padding, maxY-padding)
+	v.Title = " Account Detail "
+}
 
 var menuItems = []string{"Item 1", "Item 2", "Item 3"}
 var selectedIdx = 0

@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/jroimartin/gocui"
+	"github.com/toezbit/lazypassword/constants"
 	"github.com/toezbit/lazypassword/views"
 )
 
@@ -33,6 +34,9 @@ func layout(g *gocui.Gui) error {
 	g.Highlight = true
 	g.SelFgColor = gocui.ColorCyan
 
+	views.WorkSpace(g)
+	views.AccountList(g)
+	views.AccountDetail(g)
 
 	// views.LeftView(g)
 	// views.RightView(g)

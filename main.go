@@ -5,6 +5,7 @@ import (
 
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
+	"github.com/toezbit/lazypassword/keybliding"
 	"github.com/toezbit/lazypassword/views"
 )
 
@@ -17,8 +18,7 @@ func main() {
 
 	g.SetManagerFunc(layout)
 
-	g.SetKeybinding("", 'l', gocui.ModNone, moveRight)
-	g.SetKeybinding("", 'h', gocui.ModNone, moveLeft)
+	keybliding.SetUpNavigation(g)
 
 	if err := g.SetKeybinding("", 'q', gocui.ModNone, quit); err != nil {
 		log.Panicln(err)
@@ -38,9 +38,6 @@ func layout(g *gocui.Gui) error {
 	views.AccountList(g)
 	views.AccountDetail(g)
 
-	// views.LeftView(g)
-	// views.RightView(g)
-
 	if g.CurrentView() == nil {
 		g.SetCurrentView(constants.WorkSpace)
 	}
@@ -52,16 +49,16 @@ func quit(g *gocui.Gui, v *gocui.View) error {
 	return gocui.ErrQuit
 }
 
-func moveRight(g *gocui.Gui, v *gocui.View) error {
-	rightView, _ := g.View("right-view")
-	g.SetCurrentView("right-view")
-
-	views.DrawMenu(g, rightView, "right-view")
-	return nil
-}
-
-func moveLeft(g *gocui.Gui, v *gocui.View) error {
-	g.SetCurrentView("left-view")
-	return nil
-
-}
+// func moveRight(g *gocui.Gui, v *gocui.View) error {
+// 	rightView, _ := g.View("right-view")
+// 	g.SetCurrentView("right-view")
+//
+// 	views.DrawMenu(g, rightView, "right-view")
+// 	return nil
+// }
+//
+// func moveLeft(g *gocui.Gui, v *gocui.View) error {
+// 	g.SetCurrentView("left-view")
+// 	return nil
+//
+// }

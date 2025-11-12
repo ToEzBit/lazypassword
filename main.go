@@ -16,9 +16,14 @@ func main() {
 	}
 	defer g.Close()
 
+	g.InputEsc = true
+	g.Highlight = true
+	g.SelFgColor = gocui.ColorCyan
+
 	g.SetManagerFunc(layout)
 
 	keybliding.SetUpNavigation(g)
+	keybliding.SetUpWorkSpaceKeyBligind(g)
 
 	if err := g.SetKeybinding("", 'q', gocui.ModNone, quit); err != nil {
 		log.Panicln(err)
@@ -31,8 +36,6 @@ func main() {
 }
 
 func layout(g *gocui.Gui) error {
-	g.Highlight = true
-	g.SelFgColor = gocui.ColorCyan
 
 	views.WorkSpace(g)
 	views.AccountList(g)

@@ -5,14 +5,14 @@ import (
 	"github.com/toezbit/lazypassword/constants"
 )
 
-var views = []string{constants.WorkSpace, constants.AccountList}
+var viewList = []string{constants.WorkSpace, constants.AccountList}
 
 func cycleViewDown(g *gocui.Gui, v *gocui.View) error {
 	current := g.CurrentView().Name()
 
-	for i, view := range views {
+	for i, view := range viewList {
 		if view == current {
-			next := views[(i+1)%len(views)]
+			next := viewList[(i+1)%len(viewList)]
 			g.SetCurrentView(next)
 			break
 		}
@@ -23,9 +23,9 @@ func cycleViewDown(g *gocui.Gui, v *gocui.View) error {
 func cycleViewUp(g *gocui.Gui, v *gocui.View) error {
 	current := g.CurrentView().Name()
 
-	for i, view := range views {
+	for i, view := range viewList {
 		if view == current {
-			next := views[(i+1)%len(views)]
+			next := viewList[(i+1)%len(viewList)]
 			g.SetCurrentView(next)
 			break
 		}

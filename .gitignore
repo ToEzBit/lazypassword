@@ -38,3 +38,4 @@ go.work
 *.tmp
 *.temp
 tmp/
+lazypassword-data.json

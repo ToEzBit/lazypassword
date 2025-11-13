@@ -10,6 +10,23 @@ import (
 )
 
 func main() {
+	// data := models.ValutData{}
+	//
+	// data.Valuts = append(data.Valuts, models.Vault{
+	// 	ID:                   "1",
+	// 	WorkSpaceName:        "kuy",
+	// 	WorkSpaceDescription: "some desc",
+	// 	Credentials: []models.Credential{{
+	// 		ID:       "1",
+	// 		AcountId: "some",
+	// 		Password: "kuy",
+	// 		App:      "kako",
+	// 		Url:      "kuykuykuy",
+	// 	}},
+	// })
+	//
+	// file.WriteFile(data)
+	// return
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Panicln(err)

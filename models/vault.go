@@ -19,3 +19,9 @@ type Credential struct {
 type ValutData struct {
 	Valuts []Vault
 }
+
+type VaultWithoutCredentails struct {
+	ID                   string
+	WorkSpaceName        string
+	WorkSpaceDescription string
+}

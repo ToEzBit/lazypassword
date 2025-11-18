@@ -6,6 +6,7 @@ import (
 
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
+	"github.com/toezbit/lazypassword/services/valut"
 )
 
 var padding = 1
@@ -15,6 +16,7 @@ func WorkSpace(g *gocui.Gui) {
 	v, _ := g.SetView(constants.WorkSpace, 0, 0, maxX/2-padding, maxY/2)
 	v.Title = " Work Space "
 
+	DrawMenus(g, v, constants.WorkSpace, valut.GetWorkSpaceNames())
 }
 
 func AccountList(g *gocui.Gui) {

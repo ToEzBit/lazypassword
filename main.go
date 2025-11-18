@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	// data := models.ValutData{}
 	//
 	// data.Valuts = append(data.Valuts, models.Vault{
 	// 	ID:                   "1",
@@ -26,7 +25,7 @@ func main() {
 	// })
 	//
 	// file.WriteFile(data)
-	// return
+	// fmt.Println(valut.Data.Valuts)
 	g, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Panicln(err)

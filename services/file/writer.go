@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/models"
 	"github.com/toezbit/lazypassword/utils"
 )
@@ -33,4 +34,26 @@ func WriteFile(valuts models.ValutData) {
 		return
 	}
 
+}
+
+func TestWriter(g *gocui.Gui, v *gocui.View) error {
+
+	data := models.ValutData{}
+
+	data.Valuts = append(data.Valuts, models.Vault{
+		ID:                   "1",
+		WorkSpaceName:        "kuy",
+		WorkSpaceDescription: "some desc",
+		Credentials: []models.Credential{{
+			ID:       "1",
+			AcountId: "some",
+			Password: "kuy",
+			App:      "kako",
+			Url:      "kuykuykuy",
+		}},
+	})
+
+	WriteFile(data)
+
+	return nil
 }

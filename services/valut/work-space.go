@@ -9,8 +9,17 @@ import (
 	"github.com/toezbit/lazypassword/models"
 )
 
-func GetWorkSpaces() []models.VaultWithoutCredentails {
+type ValutManagerImpl struct {
+	gui *gocui.Gui
+}
 
+func NewValutManagerImpl(g *gocui.Gui) *ValutManagerImpl {
+	return &ValutManagerImpl{
+		gui: g,
+	}
+}
+
+func (v *ValutManagerImpl) GetWorkspaces() []models.VaultWithoutCredentails {
 	workSpaceList := lo.Map(store.Valuts, func(el models.Vault, idx int) models.VaultWithoutCredentails {
 
 		return models.VaultWithoutCredentails{
@@ -24,22 +33,21 @@ func GetWorkSpaces() []models.VaultWithoutCredentails {
 	return workSpaceList
 }
 
-func GetWorkSpaceNames() []string {
+func (v *ValutManagerImpl) GetWorkspaceNames() []string {
 	return lo.Map(store.Valuts, func(el models.Vault, idx int) string {
 		return el.WorkSpaceName
 	})
 }
 
-func AddWorkSpace(g *gocui.Gui, v *gocui.View) error {
-
-	modalWorkSpaceInput := strings.TrimSpace(g.CurrentView().Buffer())
+func (v *ValutManagerImpl) AddWorkspace(g *gocui.Gui, vi *gocui.View) error {
+	modalWorkSpaceInput := strings.TrimSpace(v.gui.CurrentView().Buffer())
 
 	if modalWorkSpaceInput == "" {
 		return nil
 	}
 
-	g.DeleteView(constants.ModalAddWorkspace)
-	g.SetCurrentView(constants.WorkSpace)
+	v.gui.DeleteView(constants.ModalAddWorkspace)
+	v.gui.SetCurrentView(constants.WorkSpace)
 
 	store.Valuts = append(store.Valuts, models.Vault{
 		ID:                   "2",
@@ -49,4 +57,5 @@ func AddWorkSpace(g *gocui.Gui, v *gocui.View) error {
 	})
 
 	return nil
+
 }

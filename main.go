@@ -4,29 +4,15 @@ import (
 	"log"
 
 	"github.com/jroimartin/gocui"
-	"github.com/toezbit/lazypassword/constants"
+	"github.com/toezbit/lazypassword/app"
 	"github.com/toezbit/lazypassword/keybliding"
+	"github.com/toezbit/lazypassword/services/valut"
 	"github.com/toezbit/lazypassword/views"
 )
 
 func main() {
-	//
-	// data.Valuts = append(data.Valuts, models.Vault{
-	// 	ID:                   "1",
-	// 	WorkSpaceName:        "kuy",
-	// 	WorkSpaceDescription: "some desc",
-	// 	Credentials: []models.Credential{{
-	// 		ID:       "1",
-	// 		AcountId: "some",
-	// 		Password: "kuy",
-	// 		App:      "kako",
-	// 		Url:      "kuykuykuy",
-	// 	}},
-	// })
-	//
-	// file.WriteFile(data)
-	// fmt.Println(valut.Data.Valuts)
 	g, err := gocui.NewGui(gocui.OutputNormal)
+
 	if err != nil {
 		log.Panicln(err)
 	}
@@ -36,48 +22,18 @@ func main() {
 	g.Highlight = true
 	g.SelFgColor = gocui.ColorCyan
 
-	g.SetManagerFunc(layout)
+	application := app.New(g)
 
-	keybliding.SetUpNavigation(g)
-	keybliding.SetUpWorkSpaceKeyBligind(g)
+	valutManager := valut.NewValutManagerImpl(g)
 
-	if err := g.SetKeybinding("", 'q', gocui.ModNone, quit); err != nil {
+	viewManager := views.NewViewManagerImpl(g, valutManager)
+
+	keyBlidingManger := keybliding.NewKeyBlidingManagerImpl(g, viewManager, valutManager)
+
+	application.Initialize(keyBlidingManger, viewManager, valutManager)
+
+	if err := application.Gui.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
 	}
 
-	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
-		log.Panicln(err)
-	}
-
 }
-
-func layout(g *gocui.Gui) error {
-
-	views.WorkSpace(g)
-	views.AccountList(g)
-	views.AccountDetail(g)
-
-	if g.CurrentView() == nil {
-		g.SetCurrentView(constants.WorkSpace)
-	}
-
-	return nil
-}
-
-func quit(g *gocui.Gui, v *gocui.View) error {
-	return gocui.ErrQuit
-}
-
-// func moveRight(g *gocui.Gui, v *gocui.View) error {
-// 	rightView, _ := g.View("right-view")
-// 	g.SetCurrentView("right-view")
-//
-// 	views.DrawMenu(g, rightView, "right-view")
-// 	return nil
-// }
-//
-// func moveLeft(g *gocui.Gui, v *gocui.View) error {
-// 	g.SetCurrentView("left-view")
-// 	return nil
-//
-// }

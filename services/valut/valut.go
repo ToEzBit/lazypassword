@@ -9,5 +9,4 @@ var store models.ValutData
 
 func init() {
 	store = file.ReadFile()
-
 }

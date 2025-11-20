@@ -10,14 +10,10 @@ type ViewManager interface {
 	AccountList()
 	AccountDetail()
 	Layout(g *gocui.Gui) error
-	OpenAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error
-	CloseAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error
-}
 
-type KeyBlidingManager interface {
-	SetupNavigation()
-	SetupWorkspace()
-	SetupGlobal()
+	SetupKeyblidingNavigation()
+	SetupKeyblidingWorkspace()
+	SetupKeyblidingGlobal()
 }
 
 type ValutManager interface {

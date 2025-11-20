@@ -5,26 +5,24 @@ import (
 )
 
 type App struct {
-	Gui               *gocui.Gui
-	KeyBlidingManager KeyBlidingManager
-	ViewManager       ViewManager
-	ValutManager      ValutManager
+	Gui          *gocui.Gui
+	ViewManager  ViewManager
+	ValutManager ValutManager
 }
 
 func New(g *gocui.Gui) *App {
 	return &App{Gui: g}
 }
 
-func (a *App) Initialize(keyBlidingManager KeyBlidingManager, viewManager ViewManager, valutManager ValutManager) error {
-	a.KeyBlidingManager = keyBlidingManager
+func (a *App) Initialize(viewManager ViewManager, valutManager ValutManager) error {
 	a.ViewManager = viewManager
 	a.ValutManager = valutManager
 
 	a.Gui.SetManagerFunc(a.ViewManager.Layout)
 
-	a.KeyBlidingManager.SetupWorkspace()
-	a.KeyBlidingManager.SetupNavigation()
-	a.KeyBlidingManager.SetupGlobal()
+	a.ViewManager.SetupKeyblidingWorkspace()
+	a.ViewManager.SetupKeyblidingNavigation()
+	a.ViewManager.SetupKeyblidingGlobal()
 
 	return nil
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/toezbit/lazypassword/constants"
 )
 
-func (vm *ViewManagerImpl) OpenAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
+func (vm *ViewManagerImpl) openAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
 	maxX, maxY := g.Size()
 
 	modalAddWorkSpace, _ := g.SetView(constants.ModalAddWorkspace, maxX/2-60, maxY/2-8, maxX/2+60, maxY/2-6)
@@ -18,7 +18,7 @@ func (vm *ViewManagerImpl) OpenAddWorkspaceModal(g *gocui.Gui, v *gocui.View) er
 
 }
 
-func (vm *ViewManagerImpl) CloseAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
+func (vm *ViewManagerImpl) closeAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
 	g.DeleteView(constants.ModalAddWorkspace)
 	g.SetCurrentView(constants.WorkSpace)
 	// g.Cursor = false

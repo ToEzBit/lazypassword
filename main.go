@@ -5,7 +5,6 @@ import (
 
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/app"
-	"github.com/toezbit/lazypassword/keybliding"
 	"github.com/toezbit/lazypassword/services/valut"
 	"github.com/toezbit/lazypassword/views"
 )
@@ -28,9 +27,7 @@ func main() {
 
 	viewManager := views.NewViewManagerImpl(g, valutManager)
 
-	keyBlidingManger := keybliding.NewKeyBlidingManagerImpl(g, viewManager, valutManager)
-
-	application.Initialize(keyBlidingManger, viewManager, valutManager)
+	application.Initialize(viewManager, valutManager)
 
 	if err := application.Gui.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)

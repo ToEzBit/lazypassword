@@ -1,9 +1,8 @@
-package keybliding
+package views
 
 import (
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
-	"github.com/toezbit/lazypassword/views"
 )
 
 var viewList = []string{constants.WorkSpace, constants.AccountList}
@@ -35,11 +34,11 @@ func cycleViewUp(g *gocui.Gui, v *gocui.View) error {
 }
 
 func moveDownMenu(g *gocui.Gui, v *gocui.View) error {
-	views.IncressSelectedIdx()
+	IncressSelectedIdx()
 	return nil
 }
 
 func moveUpMenu(g *gocui.Gui, v *gocui.View) error {
-	views.DecressSelectedIdx()
+	DecressSelectedIdx()
 	return nil
 }

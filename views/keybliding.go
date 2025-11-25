@@ -18,6 +18,11 @@ func (vm *ViewManagerImpl) SetupKeyblidingWorkspace() {
 	vm.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, vm.hanldeAddWorkspace)
 }
 
+func (vm *ViewManagerImpl) SetupKeyblidingAccountList() {
+	vm.gui.SetKeybinding(constants.AccountList, 'n', gocui.ModNone, vm.openAddAccountModal)
+	vm.gui.SetKeybinding("", gocui.KeyTab, gocui.ModNone, toggleFocusAddAccountInput)
+}
+
 func (vm *ViewManagerImpl) SetupKeyblidingGlobal() {
 	vm.gui.SetKeybinding("", 'q', gocui.ModNone, quit)
 }
@@ -27,6 +32,10 @@ func (vm *ViewManagerImpl) ClearKeyblidingNavigation() {
 	vm.gui.DeleteKeybinding("", 'l', gocui.ModNone)
 	vm.gui.DeleteKeybinding(constants.WorkSpace, 'j', gocui.ModNone)
 	vm.gui.DeleteKeybinding(constants.WorkSpace, 'k', gocui.ModNone)
+}
+
+func (vm *ViewManagerImpl) ClearKeyblidingGlobal() {
+	vm.gui.DeleteKeybinding("", 'q', gocui.ModNone)
 
 }
 

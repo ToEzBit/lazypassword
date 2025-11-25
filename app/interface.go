@@ -14,6 +14,7 @@ type ViewManager interface {
 	SetupKeyblidingNavigation()
 	SetupKeyblidingWorkspace()
 	SetupKeyblidingGlobal()
+	SetupKeyblidingAccountList()
 }
 
 type ValutManager interface {

@@ -42,3 +42,19 @@ func moveUpMenu(g *gocui.Gui, v *gocui.View) error {
 	DecressSelectedIdx()
 	return nil
 }
+
+var addAcountInputList = []string{constants.ModalAddAccountAppNameInput, constants.ModalAddAccountIdInput, constants.ModalAddAccountPasswordInput, constants.ModalAddAccountUrlInput, constants.ModalAddAccountNoteInput}
+
+func toggleFocusAddAccountInput(g *gocui.Gui, v *gocui.View) error {
+	current := g.CurrentView().Name()
+
+	for i, view := range addAcountInputList {
+		if view == current {
+			next := addAcountInputList[(i+1)%len(addAcountInputList)]
+			g.SetCurrentView(next)
+			break
+		}
+	}
+	return nil
+
+}

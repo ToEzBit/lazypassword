@@ -23,6 +23,7 @@ func (a *App) Initialize(viewManager ViewManager, valutManager ValutManager) err
 	a.ViewManager.SetupKeyblidingWorkspace()
 	a.ViewManager.SetupKeyblidingNavigation()
 	a.ViewManager.SetupKeyblidingGlobal()
+	a.ViewManager.SetupKeyblidingAccountList()
 
 	return nil
 }

@@ -41,10 +41,11 @@ func main() {
 
 func closefunction(g *gocui.Gui) {
 	g.Close()
+	valut.Save()
 	fmt.Println("👋 Cleanup complete. Application terminated.")
 
-	valutManager := valut.NewValutManagerImpl(g)
-
-	fmt.Println(valutManager.GetWorkspaces())
+	// valutManager := valut.NewValutManagerImpl(g)
+	//
+	// fmt.Println(valutManager.GetWorkspaces())
 
 }

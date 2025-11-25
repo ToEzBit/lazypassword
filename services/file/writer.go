@@ -11,8 +11,8 @@ import (
 	"github.com/toezbit/lazypassword/utils"
 )
 
-func WriteFile(valuts models.VaultData) {
-	jsonData, err := json.MarshalIndent(valuts, "", "")
+func WriteFile(data any) {
+	jsonData, err := json.MarshalIndent(data, "", "")
 
 	if err != nil {
 		fmt.Printf("Error marshaling JSON: %v\n", err)

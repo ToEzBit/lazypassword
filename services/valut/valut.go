@@ -10,3 +10,7 @@ var store models.VaultData
 func init() {
 	store = file.ReadFile()
 }
+
+func Save() {
+	file.WriteFile(store)
+}

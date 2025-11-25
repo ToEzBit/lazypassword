@@ -5,7 +5,7 @@ import (
 	"github.com/toezbit/lazypassword/services/file"
 )
 
-var store models.ValutData
+var store models.VaultData
 
 func init() {
 	store = file.ReadFile()

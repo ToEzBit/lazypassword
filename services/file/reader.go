@@ -10,21 +10,21 @@ import (
 	"github.com/toezbit/lazypassword/utils"
 )
 
-func ReadFile() models.ValutData {
+func ReadFile() models.VaultData {
 	data, err := os.ReadFile(filepath.Join(utils.GetAppDirectoryPath(), "lazypassword-data.json"))
 
 	fmt.Println(data)
 
 	if err != nil {
-		return models.ValutData{}
+		return models.VaultData{}
 	}
 
-	var valuts = models.ValutData{}
+	var valuts = models.VaultData{}
 
 	err = json.Unmarshal(data, &valuts)
 
 	if err != nil {
-		return models.ValutData{}
+		return models.VaultData{}
 	}
 
 	return valuts

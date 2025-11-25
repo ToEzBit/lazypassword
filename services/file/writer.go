@@ -11,7 +11,7 @@ import (
 	"github.com/toezbit/lazypassword/utils"
 )
 
-func WriteFile(valuts models.ValutData) {
+func WriteFile(valuts models.VaultData) {
 	jsonData, err := json.MarshalIndent(valuts, "", "")
 
 	if err != nil {
@@ -38,9 +38,9 @@ func WriteFile(valuts models.ValutData) {
 
 func TestWriter(g *gocui.Gui, v *gocui.View) error {
 
-	data := models.ValutData{}
+	data := models.VaultData{}
 
-	data.Valuts = append(data.Valuts, models.Vault{
+	data.Vaults = append(data.Vaults, models.Vault{
 		ID:                   "1",
 		WorkSpaceName:        "kuy",
 		WorkSpaceDescription: "some desc",

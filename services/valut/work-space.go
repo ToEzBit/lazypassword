@@ -1,11 +1,9 @@
 package valut
 
 import (
-	"strings"
-
+	"github.com/google/uuid"
 	"github.com/jroimartin/gocui"
 	"github.com/samber/lo"
-	"github.com/toezbit/lazypassword/constants"
 	"github.com/toezbit/lazypassword/models"
 )
 
@@ -20,7 +18,7 @@ func NewValutManagerImpl(g *gocui.Gui) *ValutManagerImpl {
 }
 
 func (v *ValutManagerImpl) GetWorkspaces() []models.VaultWithoutCredentails {
-	workSpaceList := lo.Map(store.Valuts, func(el models.Vault, idx int) models.VaultWithoutCredentails {
+	workSpaceList := lo.Map(store.Vaults, func(el models.Vault, idx int) models.VaultWithoutCredentails {
 
 		return models.VaultWithoutCredentails{
 			ID:                   el.ID,
@@ -34,28 +32,23 @@ func (v *ValutManagerImpl) GetWorkspaces() []models.VaultWithoutCredentails {
 }
 
 func (v *ValutManagerImpl) GetWorkspaceNames() []string {
-	return lo.Map(store.Valuts, func(el models.Vault, idx int) string {
+	return lo.Map(store.Vaults, func(el models.Vault, idx int) string {
 		return el.WorkSpaceName
 	})
 }
 
-func (v *ValutManagerImpl) AddWorkspace(g *gocui.Gui, vi *gocui.View) error {
-	modalWorkSpaceInput := strings.TrimSpace(v.gui.CurrentView().Buffer())
+func (v *ValutManagerImpl) AddWorkspace(workspaceName string) {
 
-	if modalWorkSpaceInput == "" {
-		return nil
-	}
-
-	v.gui.DeleteView(constants.ModalAddWorkspace)
-	v.gui.SetCurrentView(constants.WorkSpace)
-
-	store.Valuts = append(store.Valuts, models.Vault{
-		ID:                   "2",
-		WorkSpaceName:        modalWorkSpaceInput,
+	store.Vaults = append(store.Vaults, models.Vault{
+		ID:                   uuid.NewString(),
+		WorkSpaceName:        workspaceName,
 		WorkSpaceDescription: "",
 		Credentials:          []models.Credential{},
 	})
 
-	return nil
+	return
+}
 
+func CountWorkspace() int {
+	return len(store.Vaults)
 }

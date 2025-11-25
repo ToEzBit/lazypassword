@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/jroimartin/gocui"
+	"github.com/toezbit/lazypassword/services/valut"
 )
 
 var selectedMenuIdx = 0
@@ -22,7 +23,6 @@ func DrawMenus(g *gocui.Gui, v *gocui.View, viewName string, menuList []string) 
 
 			padding := strings.Repeat(" ", maxX-len(item)-2)
 
-			// fmt.Fprintf(v, "\033[42;37m%s%s\033[0m\n", item, padding)
 			fmt.Fprintf(v, "\033[40;37m%s%s\033[0m\n", item, padding)
 		} else {
 			fmt.Fprintf(v, "%s\n", item)
@@ -37,7 +37,12 @@ func ClearSelectedMenuIdx() {
 }
 
 func IncressSelectedIdx() {
-	selectedMenuIdx = selectedMenuIdx + 1
+	if selectedMenuIdx+1 >= valut.CountWorkspace() {
+		return
+	} else {
+		selectedMenuIdx = selectedMenuIdx + 1
+	}
+
 }
 
 func DecressSelectedIdx() {

@@ -16,8 +16,8 @@ type Credential struct {
 	note     string
 }
 
-type ValutData struct {
-	Valuts []Vault
+type VaultData struct {
+	Vaults []Vault
 }
 
 type VaultWithoutCredentails struct {

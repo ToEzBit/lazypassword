@@ -15,11 +15,18 @@ func (v *ViewManagerImpl) SetupKeyblidingNavigation() {
 func (v *ViewManagerImpl) SetupKeyblidingWorkspace() {
 	v.gui.SetKeybinding(constants.WorkSpace, 'n', gocui.ModNone, v.openAddWorkspaceModal)
 	v.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEsc, gocui.ModNone, v.closeAddWorkspaceModal)
-	v.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, v.valutManager.AddWorkspace)
+	v.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, v.hanldeAddWorkspace)
 }
 
 func (v *ViewManagerImpl) SetupKeyblidingGlobal() {
 	v.gui.SetKeybinding("", 'q', gocui.ModNone, quit)
+}
+
+func (v *ViewManagerImpl) ClearKeyblidingNavigation() {
+	v.gui.DeleteKeybinding("", 'h', gocui.ModNone)
+	v.gui.DeleteKeybinding("", 'l', gocui.ModNone)
+	v.gui.DeleteKeybinding(constants.WorkSpace, 'j', gocui.ModNone)
+	v.gui.DeleteKeybinding(constants.WorkSpace, 'k', gocui.ModNone)
 
 }
 

@@ -19,5 +19,5 @@ type ViewManager interface {
 type ValutManager interface {
 	GetWorkspaces() []models.VaultWithoutCredentails
 	GetWorkspaceNames() []string
-	AddWorkspace(g *gocui.Gui, v *gocui.View) error
+	AddWorkspace(workspaceName string)
 }

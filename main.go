@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/jroimartin/gocui"
@@ -10,13 +11,15 @@ import (
 )
 
 func main() {
+
 	g, err := gocui.NewGui(gocui.OutputNormal)
 
 	if err != nil {
 		log.Panicln(err)
+		fmt.Println("kuy i sas")
 	}
-	defer g.Close()
 
+	defer closefunction(g)
 	g.InputEsc = true
 	g.Highlight = true
 	g.SelFgColor = gocui.ColorCyan
@@ -31,6 +34,17 @@ func main() {
 
 	if err := application.Gui.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
+		fmt.Println("kuy i sas")
 	}
+
+}
+
+func closefunction(g *gocui.Gui) {
+	g.Close()
+	fmt.Println("👋 Cleanup complete. Application terminated.")
+
+	valutManager := valut.NewValutManagerImpl(g)
+
+	fmt.Println(valutManager.GetWorkspaces())
 
 }

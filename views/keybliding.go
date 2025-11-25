@@ -5,28 +5,28 @@ import (
 	"github.com/toezbit/lazypassword/constants"
 )
 
-func (v *ViewManagerImpl) SetupKeyblidingNavigation() {
-	v.gui.SetKeybinding("", 'h', gocui.ModNone, cycleViewUp)
-	v.gui.SetKeybinding("", 'l', gocui.ModNone, cycleViewDown)
-	v.gui.SetKeybinding(constants.WorkSpace, 'j', gocui.ModNone, moveDownMenu)
-	v.gui.SetKeybinding(constants.WorkSpace, 'k', gocui.ModNone, moveUpMenu)
+func (vm *ViewManagerImpl) SetupKeyblidingNavigation() {
+	vm.gui.SetKeybinding("", 'h', gocui.ModNone, cycleViewUp)
+	vm.gui.SetKeybinding("", 'l', gocui.ModNone, cycleViewDown)
+	vm.gui.SetKeybinding(constants.WorkSpace, 'j', gocui.ModNone, moveDownMenu)
+	vm.gui.SetKeybinding(constants.WorkSpace, 'k', gocui.ModNone, moveUpMenu)
 }
 
-func (v *ViewManagerImpl) SetupKeyblidingWorkspace() {
-	v.gui.SetKeybinding(constants.WorkSpace, 'n', gocui.ModNone, v.openAddWorkspaceModal)
-	v.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEsc, gocui.ModNone, v.closeAddWorkspaceModal)
-	v.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, v.hanldeAddWorkspace)
+func (vm *ViewManagerImpl) SetupKeyblidingWorkspace() {
+	vm.gui.SetKeybinding(constants.WorkSpace, 'n', gocui.ModNone, vm.openAddWorkspaceModal)
+	vm.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEsc, gocui.ModNone, vm.closeAddWorkspaceModal)
+	vm.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, vm.hanldeAddWorkspace)
 }
 
-func (v *ViewManagerImpl) SetupKeyblidingGlobal() {
-	v.gui.SetKeybinding("", 'q', gocui.ModNone, quit)
+func (vm *ViewManagerImpl) SetupKeyblidingGlobal() {
+	vm.gui.SetKeybinding("", 'q', gocui.ModNone, quit)
 }
 
-func (v *ViewManagerImpl) ClearKeyblidingNavigation() {
-	v.gui.DeleteKeybinding("", 'h', gocui.ModNone)
-	v.gui.DeleteKeybinding("", 'l', gocui.ModNone)
-	v.gui.DeleteKeybinding(constants.WorkSpace, 'j', gocui.ModNone)
-	v.gui.DeleteKeybinding(constants.WorkSpace, 'k', gocui.ModNone)
+func (vm *ViewManagerImpl) ClearKeyblidingNavigation() {
+	vm.gui.DeleteKeybinding("", 'h', gocui.ModNone)
+	vm.gui.DeleteKeybinding("", 'l', gocui.ModNone)
+	vm.gui.DeleteKeybinding(constants.WorkSpace, 'j', gocui.ModNone)
+	vm.gui.DeleteKeybinding(constants.WorkSpace, 'k', gocui.ModNone)
 
 }
 

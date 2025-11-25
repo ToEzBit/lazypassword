@@ -20,33 +20,33 @@ func NewViewManagerImpl(g *gocui.Gui, valm app.ValutManager) *ViewManagerImpl {
 	}
 }
 
-func (v *ViewManagerImpl) WorkSpace() {
-	maxX, maxY := v.gui.Size()
-	workSpaceView, _ := v.gui.SetView(constants.WorkSpace, 0, 0, maxX/2-padding, maxY/2)
+func (vm *ViewManagerImpl) WorkSpace() {
+	maxX, maxY := vm.gui.Size()
+	workSpaceView, _ := vm.gui.SetView(constants.WorkSpace, 0, 0, maxX/2-padding, maxY/2)
 	workSpaceView.Title = " Work Space "
 
-	DrawMenus(v.gui, workSpaceView, constants.WorkSpace, v.valutManager.GetWorkspaceNames())
+	DrawMenus(vm.gui, workSpaceView, constants.WorkSpace, vm.valutManager.GetWorkspaceNames())
 }
 
-func (v *ViewManagerImpl) AccountList() {
-	maxX, maxY := v.gui.Size()
-	accountListView, _ := v.gui.SetView(constants.AccountList, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
+func (vm *ViewManagerImpl) AccountList() {
+	maxX, maxY := vm.gui.Size()
+	accountListView, _ := vm.gui.SetView(constants.AccountList, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
 	accountListView.Title = " Account List "
 }
 
-func (v *ViewManagerImpl) AccountDetail() {
-	maxX, maxY := v.gui.Size()
-	accountDetailView, _ := v.gui.SetView(constants.AccountdDetail, maxX/2+padding, 0, maxX-padding, maxY-padding)
+func (vm *ViewManagerImpl) AccountDetail() {
+	maxX, maxY := vm.gui.Size()
+	accountDetailView, _ := vm.gui.SetView(constants.AccountdDetail, maxX/2+padding, 0, maxX-padding, maxY-padding)
 	accountDetailView.Title = " Account Detail "
 }
 
-func (v *ViewManagerImpl) Layout(g *gocui.Gui) error {
-	v.WorkSpace()
-	v.AccountDetail()
-	v.AccountList()
+func (vm *ViewManagerImpl) Layout(g *gocui.Gui) error {
+	vm.WorkSpace()
+	vm.AccountDetail()
+	vm.AccountList()
 
-	if v.gui.CurrentView() == nil {
-		v.gui.SetCurrentView(constants.WorkSpace)
+	if vm.gui.CurrentView() == nil {
+		vm.gui.SetCurrentView(constants.WorkSpace)
 	}
 
 	return nil

@@ -2,10 +2,9 @@ package app
 
 import (
 	"github.com/jroimartin/gocui"
-	"github.com/toezbit/lazypassword/models"
 )
 
-type ViewManager interface {
+type UiManager interface {
 	WorkSpace()
 	AccountList()
 	AccountDetail()
@@ -17,11 +16,9 @@ type ViewManager interface {
 	SetupKeyblidingAccountList()
 }
 
-type ValutManager interface {
-	GetValut() models.VaultData
-	GetWorkspacesWithoutCredentials() []models.VaultWithoutCredentails
+type WorkspaceManager interface {
+	// GetWorkspace() []models.Workspace
 	GetWorkspaceNames() []string
 	AddWorkspace(workspaceName string)
-
-	GetAccountList(workspaceId string) []string
+	GetCredentialNameList(workspaceId string) []string
 }

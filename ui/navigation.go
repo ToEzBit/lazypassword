@@ -1,4 +1,4 @@
-package views
+package ui
 
 import (
 	"github.com/jroimartin/gocui"

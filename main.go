@@ -6,8 +6,8 @@ import (
 
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/app"
-	"github.com/toezbit/lazypassword/services/valut"
-	"github.com/toezbit/lazypassword/views"
+	"github.com/toezbit/lazypassword/ui"
+	"github.com/toezbit/lazypassword/workspace"
 )
 
 func main() {
@@ -16,7 +16,6 @@ func main() {
 
 	if err != nil {
 		log.Panicln(err)
-		fmt.Println("kuy i sas")
 	}
 
 	defer closefunction(g)
@@ -26,28 +25,21 @@ func main() {
 
 	application := app.New(g)
 
-	valutManager := valut.NewValutManagerImpl(g)
+	workspaceManager := workspace.NewWorkspaceManagerImpl(g)
 
-	viewManager := views.NewViewManagerImpl(g, valutManager)
+	uiManager := ui.NewUiManagerImpl(g, workspaceManager)
 
-	application.Initialize(viewManager, valutManager)
+	application.Initialize(uiManager, workspaceManager)
 
 	if err := application.Gui.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
-		fmt.Println("kuy i sas")
 	}
 
 }
 
 func closefunction(g *gocui.Gui) {
 	g.Close()
-	valut.Save()
+	workspace.Save()
 	fmt.Println("👋 Cleanup complete. Application terminated.")
-
-	valutManager := valut.NewValutManagerImpl(g)
-
-	valutManager.GetAccountList("f5cc33b5-c164-450d-b9b3-704b16503604")
-	//
-	// fmt.Println(valutManager.GetAccountList('1'))
 
 }

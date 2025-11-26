@@ -6,13 +6,18 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/models"
 	"github.com/toezbit/lazypassword/utils"
 )
 
-func WriteFile(data any) {
-	jsonData, err := json.MarshalIndent(data, "", "")
+func WriteFile(data []models.Workspace) {
+
+	fileData := models.FileData{
+		Version: "1.0",
+		Data:    data,
+	}
+
+	jsonData, err := json.MarshalIndent(fileData, "", "")
 
 	if err != nil {
 		fmt.Printf("Error marshaling JSON: %v\n", err)
@@ -33,27 +38,25 @@ func WriteFile(data any) {
 		fmt.Printf("Error writing file: %v\n", err)
 		return
 	}
-
 }
 
-func TestWriter(g *gocui.Gui, v *gocui.View) error {
+func TestWriter() {
+	var data []models.Workspace
 
-	data := models.VaultData{}
-
-	data.Vaults = append(data.Vaults, models.Vault{
-		ID:                   "1",
-		WorkSpaceName:        "kuy",
-		WorkSpaceDescription: "some desc",
+	res := models.Workspace{
+		Id:   "1",
+		Name: "ai-soft",
 		Credentials: []models.Credential{{
-			ID:       "1",
-			AcountId: "some",
-			Password: "kuy",
-			App:      "kako",
-			Url:      "kuykuykuy",
+			Id:       "1",
+			AppName:  "facebook",
+			Url:      "facebook.com",
+			Email:    "john@email.com",
+			Password: "1234567890",
 		}},
-	})
+	}
+
+	data = append(data, res)
 
 	WriteFile(data)
 
-	return nil
 }

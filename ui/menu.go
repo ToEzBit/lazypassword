@@ -1,11 +1,11 @@
-package views
+package ui
 
 import (
 	"fmt"
 	"strings"
 
 	"github.com/jroimartin/gocui"
-	"github.com/toezbit/lazypassword/services/valut"
+	"github.com/toezbit/lazypassword/workspace"
 )
 
 var selectedWorkspaceIdx = 0
@@ -37,7 +37,7 @@ func ClearSelectedMenuIdx() {
 }
 
 func IncressSelectedIdx() {
-	if selectedWorkspaceIdx+1 >= valut.CountWorkspace() {
+	if selectedWorkspaceIdx+1 >= workspace.CountWorkspace() {
 		return
 	} else {
 		selectedWorkspaceIdx = selectedWorkspaceIdx + 1

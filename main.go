@@ -44,8 +44,10 @@ func closefunction(g *gocui.Gui) {
 	valut.Save()
 	fmt.Println("👋 Cleanup complete. Application terminated.")
 
-	// valutManager := valut.NewValutManagerImpl(g)
+	valutManager := valut.NewValutManagerImpl(g)
+
+	valutManager.GetAccountList("f5cc33b5-c164-450d-b9b3-704b16503604")
 	//
-	// fmt.Println(valutManager.GetWorkspaces())
+	// fmt.Println(valutManager.GetAccountList('1'))
 
 }

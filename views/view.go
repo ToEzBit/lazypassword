@@ -32,6 +32,9 @@ func (vm *ViewManagerImpl) AccountList() {
 	maxX, maxY := vm.gui.Size()
 	accountListView, _ := vm.gui.SetView(constants.AccountList, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
 	accountListView.Title = " Account List "
+
+	DrawMenus(vm.gui, accountListView, constants.AccountList, vm.valutManager.GetAccountList("1"))
+
 }
 
 func (vm *ViewManagerImpl) AccountDetail() {

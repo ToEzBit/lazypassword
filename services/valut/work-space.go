@@ -2,22 +2,11 @@ package valut
 
 import (
 	"github.com/google/uuid"
-	"github.com/jroimartin/gocui"
 	"github.com/samber/lo"
 	"github.com/toezbit/lazypassword/models"
 )
 
-type ValutManagerImpl struct {
-	gui *gocui.Gui
-}
-
-func NewValutManagerImpl(g *gocui.Gui) *ValutManagerImpl {
-	return &ValutManagerImpl{
-		gui: g,
-	}
-}
-
-func (v *ValutManagerImpl) GetWorkspaces() []models.VaultWithoutCredentails {
+func (v *ValutManagerImpl) GetWorkspacesWithoutCredentials() []models.VaultWithoutCredentails {
 	workSpaceList := lo.Map(store.Vaults, func(el models.Vault, idx int) models.VaultWithoutCredentails {
 
 		return models.VaultWithoutCredentails{

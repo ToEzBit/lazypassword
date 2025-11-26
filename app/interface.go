@@ -18,7 +18,10 @@ type ViewManager interface {
 }
 
 type ValutManager interface {
-	GetWorkspaces() []models.VaultWithoutCredentails
+	GetValut() models.VaultData
+	GetWorkspacesWithoutCredentials() []models.VaultWithoutCredentails
 	GetWorkspaceNames() []string
 	AddWorkspace(workspaceName string)
+
+	GetAccountList(workspaceId string) []string
 }

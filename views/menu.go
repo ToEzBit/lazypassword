@@ -8,7 +8,7 @@ import (
 	"github.com/toezbit/lazypassword/services/valut"
 )
 
-var selectedMenuIdx = 0
+var selectedWorkspaceIdx = 0
 
 func DrawMenus(g *gocui.Gui, v *gocui.View, viewName string, menuList []string) {
 
@@ -19,7 +19,7 @@ func DrawMenus(g *gocui.Gui, v *gocui.View, viewName string, menuList []string) 
 	isFocus := currentView != nil && g.CurrentView().Name() == viewName
 
 	for i, item := range menuList {
-		if isFocus && i == selectedMenuIdx {
+		if isFocus && i == selectedWorkspaceIdx {
 
 			padding := strings.Repeat(" ", maxX-len(item)-2)
 
@@ -33,22 +33,27 @@ func DrawMenus(g *gocui.Gui, v *gocui.View, viewName string, menuList []string) 
 }
 
 func ClearSelectedMenuIdx() {
-	selectedMenuIdx = 0
+	selectedWorkspaceIdx = 0
 }
 
 func IncressSelectedIdx() {
-	if selectedMenuIdx+1 >= valut.CountWorkspace() {
+	if selectedWorkspaceIdx+1 >= valut.CountWorkspace() {
 		return
 	} else {
-		selectedMenuIdx = selectedMenuIdx + 1
+		selectedWorkspaceIdx = selectedWorkspaceIdx + 1
 	}
 
 }
 
 func DecressSelectedIdx() {
-	if selectedMenuIdx <= 0 {
+	if selectedWorkspaceIdx <= 0 {
 		return
 	} else {
-		selectedMenuIdx = selectedMenuIdx - 1
+		selectedWorkspaceIdx = selectedWorkspaceIdx - 1
 	}
 }
+
+// func (vm *ViewManagerImpl) GetCurrentSelectedWorkspace() models.Vault {
+// 	valuts := vm.valutManager.GetValut()
+// 	return valuts[selectedWorkspaceIdx]
+// }

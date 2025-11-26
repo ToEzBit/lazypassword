@@ -16,3 +16,10 @@ func (wm *WorkspaceManagerImpl) GetCredentialNameList(workspaceId string) []stri
 	})
 
 }
+
+func CountCredential(workspaceId string) int {
+	selectedWorkspace, _ := lo.Find(workspaces, func(el models.Workspace) bool {
+		return el.Id == workspaceId
+	})
+	return len(selectedWorkspace.Credentials)
+}

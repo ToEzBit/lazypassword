@@ -23,7 +23,7 @@ func (app *App) Initialize(uiManager UiManager, workspaceManager WorkspaceManage
 	app.UiManager.SetupKeyblidingWorkspace()
 	app.UiManager.SetupKeyblidingNavigation()
 	app.UiManager.SetupKeyblidingGlobal()
-	app.UiManager.SetupKeyblidingAccountList()
+	app.UiManager.SetupKeyblidingCredential()
 
 	return nil
 }

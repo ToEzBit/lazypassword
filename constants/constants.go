@@ -1,9 +1,9 @@
 package constants
 
 const (
-	WorkSpace         = "work-space"
-	AccountList       = "account-list"
-	AccountdDetail    = "account-detail"
+	WorkSpace         = "workspace"
+	Credential        = "credential"
+	Overview          = "overview"
 	ModalAddWorkspace = "modal-add-work-space"
 
 	ModalAddAccountAppNameInput  = "modal-add-account-app-name-input"

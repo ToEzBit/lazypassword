@@ -2,22 +2,23 @@ package app
 
 import (
 	"github.com/jroimartin/gocui"
+	"github.com/toezbit/lazypassword/models"
 )
 
 type UiManager interface {
 	WorkSpace()
-	AccountList()
-	AccountDetail()
+	Credential()
+	Overview()
 	Layout(g *gocui.Gui) error
 
 	SetupKeyblidingNavigation()
 	SetupKeyblidingWorkspace()
 	SetupKeyblidingGlobal()
-	SetupKeyblidingAccountList()
+	SetupKeyblidingCredential()
 }
 
 type WorkspaceManager interface {
-	// GetWorkspace() []models.Workspace
+	GetWorkspaces() []models.Workspace
 	GetWorkspaceNames() []string
 	AddWorkspace(workspaceName string)
 	GetCredentialNameList(workspaceId string) []string

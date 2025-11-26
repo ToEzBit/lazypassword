@@ -5,7 +5,7 @@ import (
 	"github.com/toezbit/lazypassword/constants"
 )
 
-var viewList = []string{constants.WorkSpace, constants.AccountList}
+var viewList = []string{constants.WorkSpace, constants.Credential}
 
 func cycleViewDown(g *gocui.Gui, v *gocui.View) error {
 	current := g.CurrentView().Name()
@@ -17,6 +17,7 @@ func cycleViewDown(g *gocui.Gui, v *gocui.View) error {
 			break
 		}
 	}
+	ResetSelectedCredentialIdx()
 	return nil
 }
 
@@ -30,16 +31,28 @@ func cycleViewUp(g *gocui.Gui, v *gocui.View) error {
 			break
 		}
 	}
+
+	ResetSelectedCredentialIdx()
 	return nil
 }
 
-func moveDownMenu(g *gocui.Gui, v *gocui.View) error {
-	IncressSelectedIdx()
+func moveDownWorkspace(g *gocui.Gui, v *gocui.View) error {
+	IncressSelectedWorkspcaeIdx()
 	return nil
 }
 
-func moveUpMenu(g *gocui.Gui, v *gocui.View) error {
-	DecressSelectedIdx()
+func moveUpWorkspace(g *gocui.Gui, v *gocui.View) error {
+	DecressSelectedWorkspaceIdx()
+	return nil
+}
+
+func moveDownCredential(g *gocui.Gui, v *gocui.View) error {
+	IncressSelectedCredentialIdx()
+	return nil
+}
+
+func moveUpCredential(g *gocui.Gui, v *gocui.View) error {
+	DecressSelectedCredentialIdx()
 	return nil
 }
 

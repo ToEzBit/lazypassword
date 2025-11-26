@@ -28,25 +28,26 @@ func (uim *UiManagerImpl) WorkSpace() {
 	DrawMenus(uim.gui, workSpaceView, constants.WorkSpace, uim.workspaceManager.GetWorkspaceNames())
 }
 
-func (uim *UiManagerImpl) AccountList() {
+func (uim *UiManagerImpl) Credential() {
 	maxX, maxY := uim.gui.Size()
-	accountListView, _ := uim.gui.SetView(constants.AccountList, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
-	accountListView.Title = " Account List "
+	accountListView, _ := uim.gui.SetView(constants.Credential, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
+	accountListView.Title = " Credential "
 
-	DrawMenus(uim.gui, accountListView, constants.AccountList, uim.workspaceManager.GetCredentialNameList("1"))
+	currentWorkspace := uim.GetCurrentSelectedWorkspace()
+	DrawMenus(uim.gui, accountListView, constants.Credential, uim.workspaceManager.GetCredentialNameList(currentWorkspace.Id))
 
 }
 
-func (uim *UiManagerImpl) AccountDetail() {
+func (uim *UiManagerImpl) Overview() {
 	maxX, maxY := uim.gui.Size()
-	accountDetailView, _ := uim.gui.SetView(constants.AccountdDetail, maxX/2+padding, 0, maxX-padding, maxY-padding)
-	accountDetailView.Title = " Account Detail "
+	accountDetailView, _ := uim.gui.SetView(constants.Overview, maxX/2+padding, 0, maxX-padding, maxY-padding)
+	accountDetailView.Title = " Overview "
 }
 
 func (uim *UiManagerImpl) Layout(g *gocui.Gui) error {
 	uim.WorkSpace()
-	uim.AccountDetail()
-	uim.AccountList()
+	uim.Credential()
+	uim.Overview()
 
 	if uim.gui.CurrentView() == nil {
 		uim.gui.SetCurrentView(constants.WorkSpace)

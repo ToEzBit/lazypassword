@@ -28,6 +28,14 @@ func Save() {
 	file.WriteFile(workspaces)
 }
 
+func (vm *WorkspaceManagerImpl) GetWorkspaces() []models.Workspace {
+	return workspaces
+}
+
+func GetWorkspaces() []models.Workspace {
+	return workspaces
+}
+
 func (wm *WorkspaceManagerImpl) GetWorkspaceNames() []string {
 	return lo.Map(workspaces, func(el models.Workspace, idx int) string {
 		return el.Name

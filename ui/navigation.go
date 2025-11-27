@@ -56,18 +56,18 @@ func moveUpCredential(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-var addAcountInputList = []string{constants.ModalAddAccountAppNameInput, constants.ModalAddAccountIdInput, constants.ModalAddAccountPasswordInput, constants.ModalAddAccountUrlInput, constants.ModalAddAccountNoteInput}
-
-func toggleFocusAddAccountInput(g *gocui.Gui, v *gocui.View) error {
-	current := g.CurrentView().Name()
-
-	for i, view := range addAcountInputList {
-		if view == current {
-			next := addAcountInputList[(i+1)%len(addAcountInputList)]
-			g.SetCurrentView(next)
-			break
-		}
-	}
+func moveDownOverview(g *gocui.Gui, v *gocui.View) error {
+	IncressSelectedOverviewIdx()
 	return nil
+}
 
+func moveUpOverview(g *gocui.Gui, v *gocui.View) error {
+	DecressSelectedOverviewIdx()
+	return nil
+}
+
+func exitOverview(g *gocui.Gui, v *gocui.View) error {
+	selectedOverviewIdx = 0
+	g.SetCurrentView(constants.WorkSpace)
+	return nil
 }

@@ -20,9 +20,16 @@ func (uim *UiManagerImpl) SetupKeyblidingWorkspace() {
 
 func (uim *UiManagerImpl) SetupKeyblidingCredential() {
 	uim.gui.SetKeybinding(constants.Credential, 'n', gocui.ModNone, uim.openAddAccountModal)
-	uim.gui.SetKeybinding("", gocui.KeyTab, gocui.ModNone, toggleFocusAddAccountInput)
+	uim.gui.SetKeybinding("", gocui.KeyTab, gocui.ModNone, toggleFocusAddCredentialInput)
 	uim.gui.SetKeybinding(constants.Credential, 'j', gocui.ModNone, moveDownCredential)
 	uim.gui.SetKeybinding(constants.Credential, 'k', gocui.ModNone, moveUpCredential)
+	uim.gui.SetKeybinding(constants.Credential, gocui.KeyEnter, gocui.ModNone, handleSelectCredential)
+}
+
+func (uim *UiManagerImpl) SetupKeybindingOverview() {
+	uim.gui.SetKeybinding(constants.Overview, 'j', gocui.ModNone, moveDownOverview)
+	uim.gui.SetKeybinding(constants.Overview, 'k', gocui.ModNone, moveUpOverview)
+	uim.gui.SetKeybinding(constants.Overview, gocui.KeyEsc, gocui.ModNone, exitOverview)
 }
 
 func (uim *UiManagerImpl) SetupKeyblidingGlobal() {

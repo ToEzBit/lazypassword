@@ -24,6 +24,7 @@ func (app *App) Initialize(uiManager UiManager, workspaceManager WorkspaceManage
 	app.UiManager.SetupKeyblidingNavigation()
 	app.UiManager.SetupKeyblidingGlobal()
 	app.UiManager.SetupKeyblidingCredential()
+	app.UiManager.SetupKeybindingOverview()
 
 	return nil
 }

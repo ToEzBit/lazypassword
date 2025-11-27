@@ -105,3 +105,11 @@ func (uim *UiManagerImpl) GetCurrentSelectedWorkspace() models.Workspace {
 	workspaces := uim.workspaceManager.GetWorkspaces()
 	return workspaces[selectedWorkspaceIdx]
 }
+
+func (uim *UiManagerImpl) GetCurrentSelectedCredential() models.Credential {
+	workspaces := workspace.GetWorkspaces()
+	currentWorkspace := workspaces[selectedWorkspaceIdx]
+	currentCredential := currentWorkspace.Credentials[selectedCredentialIdx]
+
+	return currentCredential
+}

@@ -30,20 +30,32 @@ func (uim *UiManagerImpl) WorkSpace() {
 
 func (uim *UiManagerImpl) Credential() {
 	maxX, maxY := uim.gui.Size()
-	accountListView, _ := uim.gui.SetView(constants.Credential, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
-	accountListView.Title = " Credential "
+	credentialView, _ := uim.gui.SetView(constants.Credential, 0, maxY/2+padding, maxX/2-padding, maxY-padding)
+	credentialView.Title = " Credential "
 
 	currentWorkspace := uim.GetCurrentSelectedWorkspace()
-	DrawMenus(uim.gui, accountListView, constants.Credential, uim.workspaceManager.GetCredentialNameList(currentWorkspace.Id))
+	DrawMenus(uim.gui, credentialView, constants.Credential, uim.workspaceManager.GetCredentialNameList(currentWorkspace.Id))
 
 }
 
 func (uim *UiManagerImpl) Overview() {
 	maxX, maxY := uim.gui.Size()
-	accountDetailView, _ := uim.gui.SetView(constants.Overview, maxX/2+padding, 0, maxX-padding, maxY-padding)
-	accountDetailView.Title = " Overview "
-}
+	overviewView, _ := uim.gui.SetView(constants.Overview, maxX/2+padding, 0, maxX-padding, maxY-padding)
+	overviewView.Title = " Overview "
 
+	currentCredential := uim.GetCurrentSelectedCredential()
+
+	isFocusCredential := uim.gui.CurrentView() != nil && uim.gui.CurrentView().Name() == constants.Credential
+	isFocusOverview := uim.gui.CurrentView() != nil && uim.gui.CurrentView().Name() == constants.Overview
+
+	if isFocusCredential || isFocusOverview {
+		DrawOverview(uim.gui, overviewView, currentCredential)
+	} else {
+		overviewView, _ := uim.gui.View(constants.Overview)
+		overviewView.Clear()
+	}
+
+}
 func (uim *UiManagerImpl) Layout(g *gocui.Gui) error {
 	uim.WorkSpace()
 	uim.Credential()

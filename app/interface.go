@@ -15,6 +15,7 @@ type UiManager interface {
 	SetupKeyblidingWorkspace()
 	SetupKeyblidingGlobal()
 	SetupKeyblidingCredential()
+	SetupKeybindingOverview()
 }
 
 type WorkspaceManager interface {

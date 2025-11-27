@@ -20,10 +20,10 @@ func (app *App) Initialize(uiManager UiManager, workspaceManager WorkspaceManage
 
 	app.Gui.SetManagerFunc(app.UiManager.Layout)
 
-	app.UiManager.SetupKeyblidingWorkspace()
-	app.UiManager.SetupKeyblidingNavigation()
-	app.UiManager.SetupKeyblidingGlobal()
-	app.UiManager.SetupKeyblidingCredential()
+	app.UiManager.SetupKeybindingWorkspace()
+	app.UiManager.SetupKeybindingNavigation()
+	app.UiManager.SetupKeybindingGlobal()
+	app.UiManager.SetupKeybindingCredential()
 	app.UiManager.SetupKeybindingOverview()
 
 	return nil

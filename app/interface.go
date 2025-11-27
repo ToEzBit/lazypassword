@@ -11,10 +11,10 @@ type UiManager interface {
 	Overview()
 	Layout(g *gocui.Gui) error
 
-	SetupKeyblidingNavigation()
-	SetupKeyblidingWorkspace()
-	SetupKeyblidingGlobal()
-	SetupKeyblidingCredential()
+	SetupKeybindingNavigation()
+	SetupKeybindingWorkspace()
+	SetupKeybindingGlobal()
+	SetupKeybindingCredential()
 	SetupKeybindingOverview()
 }
 

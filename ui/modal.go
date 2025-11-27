@@ -16,8 +16,8 @@ func (uim *UiManagerImpl) openAddWorkspaceModal(g *gocui.Gui, v *gocui.View) err
 
 	// g.Cursor = true
 	g.SetCurrentView(constants.ModalAddWorkspace)
-	uim.ClearKeyblidingNavigation()
-	uim.ClearKeyblidingGlobal()
+	uim.ClearKeybindingNavigation()
+	uim.ClearKeybindingGlobal()
 
 	return nil
 
@@ -31,8 +31,8 @@ func (uim *UiManagerImpl) closeAddWorkspaceModal(g *gocui.Gui, v *gocui.View) er
 	wsView, _ := g.View(constants.WorkSpace)
 	wsView.Editable = false
 
-	uim.SetupKeyblidingNavigation()
-	uim.SetupKeyblidingGlobal()
+	uim.SetupKeybindingNavigation()
+	uim.SetupKeybindingGlobal()
 
 	return nil
 }
@@ -50,8 +50,8 @@ func (uim *UiManagerImpl) hanldeAddWorkspace(g *gocui.Gui, view *gocui.View) err
 	uim.gui.DeleteView(constants.ModalAddWorkspace)
 	uim.gui.SetCurrentView(constants.WorkSpace)
 
-	uim.SetupKeyblidingNavigation()
-	uim.SetupKeyblidingGlobal()
+	uim.SetupKeybindingNavigation()
+	uim.SetupKeybindingGlobal()
 
 	return nil
 }

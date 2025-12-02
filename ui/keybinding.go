@@ -30,6 +30,8 @@ func (uim *UiManagerImpl) SetupKeybindingOverview() {
 	uim.gui.SetKeybinding(constants.Overview, 'j', gocui.ModNone, moveDownOverview)
 	uim.gui.SetKeybinding(constants.Overview, 'k', gocui.ModNone, moveUpOverview)
 	uim.gui.SetKeybinding(constants.Overview, gocui.KeyEsc, gocui.ModNone, exitOverview)
+	uim.gui.SetKeybinding(constants.Overview, 'y', gocui.ModNone, copyCurrentSelectedOverview)
+
 }
 
 func (uim *UiManagerImpl) SetupKeybindingGlobal() {

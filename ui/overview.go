@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/atotto/clipboard"
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
 	"github.com/toezbit/lazypassword/models"
+	"github.com/toezbit/lazypassword/workspace"
 )
 
 var selectedOverviewIdx = 0
@@ -90,4 +92,31 @@ func DecressSelectedOverviewIdx() {
 	}
 	selectedOverviewIdx = selectedOverviewIdx - 1
 
+}
+
+func copyCurrentSelectedOverview(g *gocui.Gui, v *gocui.View) error {
+	var valueToCopy string
+
+	workspaces := workspace.GetWorkspaces()
+	currentWorkspace := workspaces[selectedWorkspaceIdx]
+	currentCredential := currentWorkspace.Credentials[selectedCredentialIdx]
+
+	switch selectedOverviewIdx {
+	case appNameIdx:
+		valueToCopy = currentCredential.AppName
+		break
+	case emailIdx:
+		valueToCopy = currentCredential.Email
+		break
+	case passwordIdx:
+		valueToCopy = currentCredential.Password
+		break
+	case urlIdx:
+		valueToCopy = currentCredential.Url
+		break
+	case noteIdx:
+		valueToCopy = currentCredential.Note
+	}
+	clipboard.WriteAll(valueToCopy)
+	return nil
 }

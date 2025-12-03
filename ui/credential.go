@@ -5,7 +5,7 @@ import (
 	"github.com/toezbit/lazypassword/constants"
 )
 
-var addCredentialInputList = []string{constants.ModalAddAccountAppNameInput, constants.ModalAddAccountIdInput, constants.ModalAddAccountPasswordInput, constants.ModalAddAccountUrlInput, constants.ModalAddAccountNoteInput}
+var addCredentialInputList = []string{constants.ModalAddCredentialAppNameInput, constants.ModalAddCredentialEmailInput, constants.ModalAddCredentialPasswordInput, constants.ModalAddCredentialUrlInput, constants.ModalAddCredentialNoteInput}
 
 func toggleFocusAddCredentialInput(g *gocui.Gui, v *gocui.View) error {
 	current := g.CurrentView().Name()

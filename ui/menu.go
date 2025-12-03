@@ -103,12 +103,27 @@ func ResetSelectedCredentialIdx() {
 
 func (uim *UiManagerImpl) GetCurrentSelectedWorkspace() models.Workspace {
 	workspaces := uim.workspaceManager.GetWorkspaces()
+
+	if len(workspaces) == 0 {
+		return models.Workspace{}
+	}
+
 	return workspaces[selectedWorkspaceIdx]
 }
 
 func (uim *UiManagerImpl) GetCurrentSelectedCredential() models.Credential {
 	workspaces := workspace.GetWorkspaces()
+
+	if len(workspaces) == 0 {
+		return models.Credential{}
+	}
+
 	currentWorkspace := workspaces[selectedWorkspaceIdx]
+
+	if len(currentWorkspace.Credentials) == 0 {
+		return models.Credential{}
+	}
+
 	currentCredential := currentWorkspace.Credentials[selectedCredentialIdx]
 
 	return currentCredential

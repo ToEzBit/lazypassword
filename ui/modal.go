@@ -5,6 +5,7 @@ import (
 
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
+	"github.com/toezbit/lazypassword/models"
 )
 
 func (uim *UiManagerImpl) openAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
@@ -37,7 +38,7 @@ func (uim *UiManagerImpl) closeAddWorkspaceModal(g *gocui.Gui, v *gocui.View) er
 	return nil
 }
 
-func (uim *UiManagerImpl) hanldeAddWorkspace(g *gocui.Gui, view *gocui.View) error {
+func (uim *UiManagerImpl) handleAddWorkspace(g *gocui.Gui, view *gocui.View) error {
 
 	modalWorkSpaceInput := strings.TrimSpace(uim.gui.CurrentView().Buffer())
 
@@ -56,7 +57,7 @@ func (uim *UiManagerImpl) hanldeAddWorkspace(g *gocui.Gui, view *gocui.View) err
 	return nil
 }
 
-func (uim *UiManagerImpl) openAddAccountModal(g *gocui.Gui, v *gocui.View) error {
+func (uim *UiManagerImpl) openAddCredentialModal(g *gocui.Gui, v *gocui.View) error {
 
 	maxX, maxY := g.Size()
 
@@ -65,32 +66,87 @@ func (uim *UiManagerImpl) openAddAccountModal(g *gocui.Gui, v *gocui.View) error
 	endX := maxX/2 + (width / 2)
 	currentY := maxY/2 - 10
 
-	appNameInput, _ := g.SetView(constants.ModalAddAccountAppNameInput, startX, currentY, endX, currentY+2)
+	appNameInput, _ := g.SetView(constants.ModalAddCredentialAppNameInput, startX, currentY, endX, currentY+2)
 	appNameInput.Title = " App Name "
 	appNameInput.Editable = true
 	currentY += 4
 
-	accountIdInput, _ := g.SetView(constants.ModalAddAccountIdInput, startX, currentY, endX, currentY+2)
-	accountIdInput.Title = " Account Id or Email "
-	accountIdInput.Editable = true
+	emailInput, _ := g.SetView(constants.ModalAddCredentialEmailInput, startX, currentY, endX, currentY+2)
+	emailInput.Title = " Email/Username "
+	emailInput.Editable = true
 	currentY += 4
 
-	passwordInput, _ := g.SetView(constants.ModalAddAccountPasswordInput, startX, currentY, endX, currentY+2)
+	passwordInput, _ := g.SetView(constants.ModalAddCredentialPasswordInput, startX, currentY, endX, currentY+2)
 	passwordInput.Title = " Password "
 	passwordInput.Editable = true
 	currentY += 4
 
-	urlInput, _ := g.SetView(constants.ModalAddAccountUrlInput, startX, currentY, endX, currentY+2)
+	urlInput, _ := g.SetView(constants.ModalAddCredentialUrlInput, startX, currentY, endX, currentY+2)
 	urlInput.Title = " Url "
 	urlInput.Editable = true
 	currentY += 4
 
-	noteInput, _ := g.SetView(constants.ModalAddAccountNoteInput, startX, currentY, endX, currentY+8)
+	noteInput, _ := g.SetView(constants.ModalAddCredentialNoteInput, startX, currentY, endX, currentY+8)
 	noteInput.Title = " Note "
 	noteInput.Editable = true
 
-	g.SetCurrentView(constants.ModalAddAccountAppNameInput)
+	g.SetCurrentView(constants.ModalAddCredentialAppNameInput)
+
+	uim.ClearKeybindingNavigation()
+	uim.ClearKeybindingGlobal()
 
 	return nil
 
+}
+
+func (uim *UiManagerImpl) handleAddCredential(g *gocui.Gui, v *gocui.View) error {
+
+	appNameInputView, _ := g.View(constants.ModalAddCredentialAppNameInput)
+	emailInputView, _ := g.View(constants.ModalAddCredentialEmailInput)
+	passwordInputView, _ := g.View(constants.ModalAddCredentialPasswordInput)
+	urlInputView, _ := g.View(constants.ModalAddCredentialUrlInput)
+	noteInputView, _ := g.View(constants.ModalAddCredentialNoteInput)
+
+	currentWorkspace := uim.GetCurrentSelectedWorkspace()
+
+	data := models.Credential{
+		Id:       "1",
+		AppName:  strings.TrimSpace(appNameInputView.Buffer()),
+		Email:    strings.TrimSpace(emailInputView.Buffer()),
+		Password: strings.TrimSpace(passwordInputView.Buffer()),
+		Url:      strings.TrimSpace(urlInputView.Buffer()),
+		Note:     strings.TrimSpace(noteInputView.Buffer()),
+	}
+
+	uim.workspaceManager.AddCredential(currentWorkspace.Id, data)
+
+	g.DeleteView(constants.ModalAddCredentialAppNameInput)
+	g.DeleteView(constants.ModalAddCredentialEmailInput)
+	g.DeleteView(constants.ModalAddCredentialPasswordInput)
+	g.DeleteView(constants.ModalAddCredentialUrlInput)
+	g.DeleteView(constants.ModalAddCredentialNoteInput)
+
+	g.SetCurrentView(constants.Overview)
+	uim.SetupKeybindingNavigation()
+	uim.SetupKeybindingGlobal()
+
+	return nil
+}
+
+func (uim *UiManagerImpl) closeAddCredentialModal(g *gocui.Gui, v *gocui.View) error {
+	g.DeleteView(constants.ModalAddCredentialAppNameInput)
+	g.DeleteView(constants.ModalAddCredentialEmailInput)
+	g.DeleteView(constants.ModalAddCredentialPasswordInput)
+	g.DeleteView(constants.ModalAddCredentialUrlInput)
+	g.DeleteView(constants.ModalAddCredentialNoteInput)
+
+	g.SetCurrentView(constants.Credential)
+
+	// wsView, _ := g.View(constants.Credential)
+	// wsView.Editable = false
+
+	uim.SetupKeybindingNavigation()
+	uim.SetupKeybindingGlobal()
+
+	return nil
 }

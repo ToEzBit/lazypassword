@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/jroimartin/gocui"
@@ -16,6 +15,7 @@ func main() {
 
 	if err != nil {
 		log.Panicln(err)
+		return
 	}
 
 	defer closefunction(g)
@@ -40,6 +40,4 @@ func main() {
 func closefunction(g *gocui.Gui) {
 	g.Close()
 	workspace.Save()
-	fmt.Println("👋 Cleanup complete. Application terminated.")
-
 }

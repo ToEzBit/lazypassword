@@ -62,7 +62,7 @@ func DrawOverview(g *gocui.Gui, v *gocui.View, credential models.Credential) {
 	drawRow(g, v, "App/Service", credential.AppName, selectedOverviewIdx == appNameIdx)
 
 	fmt.Fprintln(v, "")
-	drawRow(g, v, "Username/ID", credential.Email, selectedOverviewIdx == emailIdx)
+	drawRow(g, v, "Email/Username", credential.Email, selectedOverviewIdx == emailIdx)
 
 	fmt.Fprintln(v, "")
 

@@ -15,11 +15,13 @@ func (uim *UiManagerImpl) SetupKeybindingNavigation() {
 func (uim *UiManagerImpl) SetupKeybindingWorkspace() {
 	uim.gui.SetKeybinding(constants.WorkSpace, 'n', gocui.ModNone, uim.openAddWorkspaceModal)
 	uim.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEsc, gocui.ModNone, uim.closeAddWorkspaceModal)
-	uim.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, uim.hanldeAddWorkspace)
+	uim.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, uim.handleAddWorkspace)
 }
 
 func (uim *UiManagerImpl) SetupKeybindingCredential() {
-	uim.gui.SetKeybinding(constants.Credential, 'n', gocui.ModNone, uim.openAddAccountModal)
+	uim.gui.SetKeybinding(constants.Credential, 'n', gocui.ModNone, uim.openAddCredentialModal)
+	uim.gui.SetKeybinding(constants.ModalAddCredentialAppNameInput, gocui.KeyEsc, gocui.ModNone, uim.closeAddCredentialModal)
+	uim.gui.SetKeybinding(constants.ModalAddCredentialAppNameInput, gocui.KeyEnter, gocui.ModNone, uim.handleAddCredential)
 	uim.gui.SetKeybinding("", gocui.KeyTab, gocui.ModNone, toggleFocusAddCredentialInput)
 	uim.gui.SetKeybinding(constants.Credential, 'j', gocui.ModNone, moveDownCredential)
 	uim.gui.SetKeybinding(constants.Credential, 'k', gocui.ModNone, moveUpCredential)

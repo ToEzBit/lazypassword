@@ -6,9 +6,9 @@ const (
 	Overview          = "overview"
 	ModalAddWorkspace = "modal-add-work-space"
 
-	ModalAddAccountAppNameInput  = "modal-add-account-app-name-input"
-	ModalAddAccountIdInput       = "modal-add-account-Id-input"
-	ModalAddAccountPasswordInput = "modal-add-account-password-input"
-	ModalAddAccountUrlInput      = "modal-add-account-url-input"
-	ModalAddAccountNoteInput     = "modal-add-account-note-input"
+	ModalAddCredentialAppNameInput  = "modal-add-Credential-app-name-input"
+	ModalAddCredentialEmailInput    = "modal-add-Credential-email-input"
+	ModalAddCredentialPasswordInput = "modal-add-Credential-password-input"
+	ModalAddCredentialUrlInput      = "modal-add-Credential-url-input"
+	ModalAddCredentialNoteInput     = "modal-add-Credential-note-input"
 )

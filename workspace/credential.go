@@ -23,3 +23,15 @@ func CountCredential(workspaceId string) int {
 	})
 	return len(selectedWorkspace.Credentials)
 }
+
+func (wm *WorkspaceManagerImpl) AddCredential(workspaceId string, data models.Credential) {
+
+	_, targetWorkspaceIdx, _ := lo.FindIndexOf(workspaces, func(el models.Workspace) bool {
+		return el.Id == workspaceId
+	})
+
+	updatedCredentials := append(workspaces[targetWorkspaceIdx].Credentials, data)
+
+	workspaces[targetWorkspaceIdx].Credentials = updatedCredentials
+
+}

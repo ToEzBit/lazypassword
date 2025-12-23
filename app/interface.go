@@ -22,6 +22,7 @@ type WorkspaceManager interface {
 	GetWorkspaces() []models.Workspace
 	GetWorkspaceNames() []string
 	AddWorkspace(workspaceName string)
+	DeleteWorkspace(workspaceId string)
 	AddCredential(worksapceId string, data models.Credential)
 	GetCredentialNameList(workspaceId string) []string
 	DeleteCredential(workspaceId string, credentialId string)

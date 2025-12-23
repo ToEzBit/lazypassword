@@ -152,6 +152,39 @@ func (uim *UiManagerImpl) closeAddCredentialModal(g *gocui.Gui, v *gocui.View) e
 	return nil
 }
 
+func (uim *UiManagerImpl) openConfirmDeleteWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
+
+	currentWorkspace := uim.GetCurrentSelectedWorkspace()
+
+	maxX, maxY := g.Size()
+
+	confirmModal, _ := g.SetView(constants.ModalConfirmDeleteWorkspace, maxX/2-60, maxY/2-8, maxX/2+60, maxY/2-6)
+	confirmModal.Title = " Confirm Delete Workspace " + "`" + currentWorkspace.Name + "`" + "? "
+	g.SetCurrentView(constants.ModalConfirmDeleteWorkspace)
+
+	fmt.Fprintf(confirmModal, "%s\n", " Confirm (y) Cancel (n) ")
+
+	return nil
+}
+
+func (uim *UiManagerImpl) closeConfirmDeleteWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
+	g.SetCurrentView(constants.WorkSpace)
+	g.DeleteView(constants.ModalConfirmDeleteWorkspace)
+	return nil
+}
+
+func (uim *UiManagerImpl) handleDeleteWorkspace(g *gocui.Gui, v *gocui.View) error {
+	currentWorkspace := uim.GetCurrentSelectedWorkspace()
+
+	uim.workspaceManager.DeleteWorkspace(currentWorkspace.Id)
+
+	ClearSelectedMenuIdx()
+
+	uim.closeConfirmDeleteWorkspaceModal(g, v)
+
+	return nil
+}
+
 func (uim *UiManagerImpl) openConfirmDeleteCredentialModal(g *gocui.Gui, v *gocui.View) error {
 
 	currentCredential := uim.GetCurrentSelectedCredential()

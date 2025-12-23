@@ -16,6 +16,10 @@ func (uim *UiManagerImpl) SetupKeybindingWorkspace() {
 	uim.gui.SetKeybinding(constants.WorkSpace, 'n', gocui.ModNone, uim.openAddWorkspaceModal)
 	uim.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEsc, gocui.ModNone, uim.closeAddWorkspaceModal)
 	uim.gui.SetKeybinding(constants.ModalAddWorkspace, gocui.KeyEnter, gocui.ModNone, uim.handleAddWorkspace)
+	uim.gui.SetKeybinding(constants.WorkSpace, 'd', gocui.ModNone, uim.openConfirmDeleteWorkspaceModal)
+	uim.gui.SetKeybinding(constants.ModalConfirmDeleteWorkspace, 'n', gocui.ModNone, uim.closeConfirmDeleteWorkspaceModal)
+	uim.gui.SetKeybinding(constants.ModalConfirmDeleteWorkspace, 'y', gocui.ModNone, uim.handleDeleteWorkspace)
+
 }
 
 func (uim *UiManagerImpl) SetupKeybindingCredential() {

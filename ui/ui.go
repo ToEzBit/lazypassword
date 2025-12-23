@@ -79,7 +79,7 @@ func (uim *UiManagerImpl) KeyblidingList() {
 
 	switch currentView.Name() {
 	case constants.WorkSpace:
-		leftText = "Add: n"
+		leftText = "Add: n | Delete: d"
 	case constants.ModalAddWorkspace:
 		leftText = "Confirm : <enter> | Exit : <esc>"
 	case constants.Credential:

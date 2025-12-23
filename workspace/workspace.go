@@ -1,6 +1,8 @@
 package workspace
 
 import (
+	"slices"
+
 	"github.com/google/uuid"
 	"github.com/jroimartin/gocui"
 	"github.com/samber/lo"
@@ -51,6 +53,18 @@ func (wm *WorkspaceManagerImpl) AddWorkspace(workspaceName string) {
 	})
 
 	return
+}
+
+func (wm *WorkspaceManagerImpl) DeleteWorkspace(workspaceId string) {
+
+	_, targetWorkspaceIdx, _ := lo.FindIndexOf(workspaces, func(el models.Workspace) bool {
+		return el.Id == workspaceId
+	})
+
+	updatedWorkspace := slices.Delete(workspaces, targetWorkspaceIdx, targetWorkspaceIdx+1)
+
+	workspaces = updatedWorkspace
+
 }
 
 func CountWorkspace() int {

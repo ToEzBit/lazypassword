@@ -179,7 +179,7 @@ func (uim *UiManagerImpl) handleDeleteCredential(g *gocui.Gui, v *gocui.View) er
 
 	uim.workspaceManager.DeleteCredential(currentWorkspace.Id, currentCredential.Id)
 
-	selectedCredentialIdx = 0
+	ClearSelectedCredentialIdx()
 
 	uim.closeConfirmDeleteCredentialModal(g, v)
 

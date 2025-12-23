@@ -54,6 +54,10 @@ func ClearSelectedMenuIdx() {
 	selectedWorkspaceIdx = 0
 }
 
+func ClearSelectedCredentialIdx() {
+	selectedCredentialIdx = 0
+}
+
 func IncressSelectedWorkspcaeIdx() {
 	if selectedWorkspaceIdx+1 >= workspace.CountWorkspace() {
 		return

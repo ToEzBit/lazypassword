@@ -36,12 +36,12 @@ func DrawMenus(g *gocui.Gui, v *gocui.View, viewName string, menuList []string) 
 
 			padding := strings.Repeat(" ", maxX-len(item)-2)
 
-			fmt.Fprintf(v, "\033[40;37m%s%s\033[0m\n", item, padding)
+			fmt.Fprintf(v, "\033[46;30m%s%s\033[0m\n", item, padding)
 		} else if isNotFocusWorkspace && i == selectedViewIdx {
 
 			padding := strings.Repeat(" ", maxX-len(item)-2)
 
-			fmt.Fprintf(v, "\033[37m%s%s\033[0m\n", item, padding)
+			fmt.Fprintf(v, "\033[36m%s%s\033[0m\n", item, padding)
 		} else {
 			fmt.Fprintf(v, "%s\n", item)
 		}

@@ -25,7 +25,7 @@ func drawRow(g *gocui.Gui, v *gocui.View, label, value string, isDrawHighlight b
 	const (
 		reset          = "\033[0m"
 		paddingSize    = 15
-		highlightColor = "\033[40;37m"
+		highlightColor = "\033[46;30m"
 	)
 	maxX, _ := v.Size()
 

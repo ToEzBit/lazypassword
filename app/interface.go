@@ -24,4 +24,5 @@ type WorkspaceManager interface {
 	AddWorkspace(workspaceName string)
 	AddCredential(worksapceId string, data models.Credential)
 	GetCredentialNameList(workspaceId string) []string
+	DeleteCredential(workspaceId string, credentialId string)
 }

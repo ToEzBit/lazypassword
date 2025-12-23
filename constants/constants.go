@@ -12,4 +12,6 @@ const (
 	ModalAddCredentialPasswordInput = "modal-add-Credential-password-input"
 	ModalAddCredentialUrlInput      = "modal-add-Credential-url-input"
 	ModalAddCredentialNoteInput     = "modal-add-Credential-note-input"
+
+	ModalConfirmDeleteCredential = "modal-confirm-delete-credential"
 )

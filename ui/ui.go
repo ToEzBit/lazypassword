@@ -79,11 +79,11 @@ func (uim *UiManagerImpl) KeyblidingList() {
 
 	switch currentView.Name() {
 	case constants.WorkSpace:
-		leftText = "Add-Workspace: n"
+		leftText = "Add: n"
 	case constants.ModalAddWorkspace:
 		leftText = "Confirm : <enter> | Exit : <esc>"
 	case constants.Credential:
-		leftText = "Add-Credential: n | Select-Credential: <enter>"
+		leftText = "Add: n | Delete: d | Select: <enter>"
 	case constants.ModalAddCredentialAppNameInput:
 		leftText = "Confirm : <enter> | Exit : <esc> | Toggle-Tab : <tab>"
 	case constants.ModalAddCredentialEmailInput, constants.ModalAddCredentialPasswordInput, constants.ModalAddCredentialUrlInput, constants.ModalAddCredentialNoteInput:

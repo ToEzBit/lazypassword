@@ -26,6 +26,9 @@ func (uim *UiManagerImpl) SetupKeybindingCredential() {
 	uim.gui.SetKeybinding(constants.Credential, 'j', gocui.ModNone, moveDownCredential)
 	uim.gui.SetKeybinding(constants.Credential, 'k', gocui.ModNone, moveUpCredential)
 	uim.gui.SetKeybinding(constants.Credential, gocui.KeyEnter, gocui.ModNone, handleSelectCredential)
+	uim.gui.SetKeybinding(constants.Credential, 'd', gocui.ModNone, uim.openConfirmDeleteCredentialModal)
+	uim.gui.SetKeybinding(constants.ModalConfirmDeleteCredential, 'n', gocui.ModNone, uim.closeConfirmDeleteCredentialModal)
+	uim.gui.SetKeybinding(constants.ModalConfirmDeleteCredential, 'y', gocui.ModNone, uim.handleDeleteCredential)
 }
 
 func (uim *UiManagerImpl) SetupKeybindingOverview() {
@@ -49,7 +52,6 @@ func (uim *UiManagerImpl) ClearKeybindingNavigation() {
 
 func (uim *UiManagerImpl) ClearKeybindingGlobal() {
 	uim.gui.DeleteKeybinding("", 'q', gocui.ModNone)
-
 }
 
 func quit(g *gocui.Gui, v *gocui.View) error {

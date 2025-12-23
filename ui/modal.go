@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/jroimartin/gocui"
@@ -147,6 +148,40 @@ func (uim *UiManagerImpl) closeAddCredentialModal(g *gocui.Gui, v *gocui.View) e
 
 	uim.SetupKeybindingNavigation()
 	uim.SetupKeybindingGlobal()
+
+	return nil
+}
+
+func (uim *UiManagerImpl) openConfirmDeleteCredentialModal(g *gocui.Gui, v *gocui.View) error {
+
+	currentCredential := uim.GetCurrentSelectedCredential()
+
+	maxX, maxY := g.Size()
+
+	confirmModal, _ := g.SetView(constants.ModalConfirmDeleteCredential, maxX/2-60, maxY/2-8, maxX/2+60, maxY/2-6)
+	confirmModal.Title = " Confirm Delete App " + "`" + currentCredential.AppName + "`" + "? "
+	g.SetCurrentView(constants.ModalConfirmDeleteCredential)
+
+	fmt.Fprintf(confirmModal, "%s\n", " Confirm (y) Cancel (n) ")
+
+	return nil
+}
+
+func (uim *UiManagerImpl) closeConfirmDeleteCredentialModal(g *gocui.Gui, v *gocui.View) error {
+	g.SetCurrentView(constants.Credential)
+	g.DeleteView(constants.ModalConfirmDeleteCredential)
+	return nil
+}
+
+func (uim *UiManagerImpl) handleDeleteCredential(g *gocui.Gui, v *gocui.View) error {
+	currentWorkspace := uim.GetCurrentSelectedWorkspace()
+	currentCredential := uim.GetCurrentSelectedCredential()
+
+	uim.workspaceManager.DeleteCredential(currentWorkspace.Id, currentCredential.Id)
+
+	selectedCredentialIdx = 0
+
+	uim.closeConfirmDeleteCredentialModal(g, v)
 
 	return nil
 }

@@ -52,7 +52,9 @@ func (uim *UiManagerImpl) Overview() {
 	isFocusCredential := uim.gui.CurrentView() != nil && uim.gui.CurrentView().Name() == constants.Credential
 	isFocusOverview := uim.gui.CurrentView() != nil && uim.gui.CurrentView().Name() == constants.Overview
 
-	if isFocusCredential || isFocusOverview {
+	isHasCredential := len(uim.GetCurrentSelectedWorkspace().Credentials) > 0
+
+	if (isFocusCredential || isFocusOverview) && isHasCredential {
 		DrawOverview(uim.gui, overviewView, currentCredential)
 	} else {
 		overviewView, _ := uim.gui.View(constants.Overview)

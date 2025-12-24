@@ -21,12 +21,16 @@ func NewWorkspaceManagerImpl(g *gocui.Gui) *WorkspaceManagerImpl {
 }
 
 var workspaces []models.Workspace
+var loadedSuccessfully bool
 
 func init() {
-	workspaces = file.ReadFile()
+	workspaces, loadedSuccessfully = file.ReadFile()
 }
 
 func Save() {
+	if !loadedSuccessfully {
+		return
+	}
 	file.WriteFile(workspaces)
 }
 

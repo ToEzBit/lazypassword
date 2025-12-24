@@ -9,18 +9,22 @@ import (
 	"github.com/toezbit/lazypassword/utils"
 )
 
-func ReadFile() []models.Workspace {
+func ReadFile() ([]models.Workspace, bool) {
 	var fileData models.FileData
 
 	data, err := os.ReadFile(filepath.Join(utils.GetAppDirectoryPath(), "lazypassword-data.json"))
 
 	if err != nil {
-		return []models.Workspace{}
-
+		if os.IsNotExist(err) {
+			return []models.Workspace{}, true
+		}
+		return []models.Workspace{}, false
 	}
 
-	json.Unmarshal(data, &fileData)
+	err = json.Unmarshal(data, &fileData)
+	if err != nil {
+		return []models.Workspace{}, false
+	}
 
-	return fileData.Data
-
+	return fileData.Data, true
 }

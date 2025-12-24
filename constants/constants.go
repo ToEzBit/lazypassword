@@ -4,7 +4,7 @@ const (
 	WorkSpace         = "workspace"
 	Credential        = "credential"
 	Overview          = "overview"
-	KeyblidingList    = "keyblidingList"
+	KeybindingList    = "keybindingList"
 	ModalAddWorkspace = "modal-add-work-space"
 
 	ModalAddCredentialAppNameInput  = "modal-add-Credential-app-name-input"

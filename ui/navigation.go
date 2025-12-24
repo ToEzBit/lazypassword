@@ -37,32 +37,32 @@ func cycleViewUp(g *gocui.Gui, v *gocui.View) error {
 }
 
 func moveDownWorkspace(g *gocui.Gui, v *gocui.View) error {
-	IncressSelectedWorkspcaeIdx()
+	IncreaseSelectedWorkspaceIdx()
 	return nil
 }
 
 func moveUpWorkspace(g *gocui.Gui, v *gocui.View) error {
-	DecressSelectedWorkspaceIdx()
+	DecreaseSelectedWorkspaceIdx()
 	return nil
 }
 
 func moveDownCredential(g *gocui.Gui, v *gocui.View) error {
-	IncressSelectedCredentialIdx()
+	IncreaseSelectedCredentialIdx()
 	return nil
 }
 
 func moveUpCredential(g *gocui.Gui, v *gocui.View) error {
-	DecressSelectedCredentialIdx()
+	DecreaseSelectedCredentialIdx()
 	return nil
 }
 
 func moveDownOverview(g *gocui.Gui, v *gocui.View) error {
-	IncressSelectedOverviewIdx()
+	IncreaseSelectedOverviewIdx()
 	return nil
 }
 
 func moveUpOverview(g *gocui.Gui, v *gocui.View) error {
-	DecressSelectedOverviewIdx()
+	DecreaseSelectedOverviewIdx()
 	return nil
 }
 

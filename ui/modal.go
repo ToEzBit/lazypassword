@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/google/uuid"
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
 	"github.com/toezbit/lazypassword/models"
@@ -111,7 +112,7 @@ func (uim *UiManagerImpl) handleAddCredential(g *gocui.Gui, v *gocui.View) error
 	currentWorkspace := uim.GetCurrentSelectedWorkspace()
 
 	data := models.Credential{
-		Id:       "1",
+		Id:       uuid.New().String(),
 		AppName:  strings.TrimSpace(appNameInputView.Buffer()),
 		Email:    strings.TrimSpace(emailInputView.Buffer()),
 		Password: strings.TrimSpace(passwordInputView.Buffer()),

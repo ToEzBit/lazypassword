@@ -58,7 +58,7 @@ func ClearSelectedCredentialIdx() {
 	selectedCredentialIdx = 0
 }
 
-func IncressSelectedWorkspcaeIdx() {
+func IncreaseSelectedWorkspaceIdx() {
 	if selectedWorkspaceIdx+1 >= workspace.CountWorkspace() {
 		return
 	} else {
@@ -67,7 +67,7 @@ func IncressSelectedWorkspcaeIdx() {
 
 }
 
-func DecressSelectedWorkspaceIdx() {
+func DecreaseSelectedWorkspaceIdx() {
 	if selectedWorkspaceIdx <= 0 {
 		return
 	} else {
@@ -75,7 +75,7 @@ func DecressSelectedWorkspaceIdx() {
 	}
 }
 
-func IncressSelectedCredentialIdx() {
+func IncreaseSelectedCredentialIdx() {
 	workspaces := workspace.GetWorkspaces()
 	currentWorkspace := workspaces[selectedWorkspaceIdx]
 
@@ -90,7 +90,7 @@ func IncressSelectedCredentialIdx() {
 
 }
 
-func DecressSelectedCredentialIdx() {
+func DecreaseSelectedCredentialIdx() {
 
 	if selectedCredentialIdx <= 0 {
 		return

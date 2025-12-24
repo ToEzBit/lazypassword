@@ -10,7 +10,7 @@ import (
 )
 
 var padding = 1
-var keyblidingHeight = 3
+var keybindingHeight = 3
 
 type UiManagerImpl struct {
 	gui              *gocui.Gui
@@ -26,7 +26,7 @@ func NewUiManagerImpl(g *gocui.Gui, workspaceManager app.WorkspaceManager) *UiMa
 
 func (uim *UiManagerImpl) WorkSpace() {
 	maxX, maxY := uim.gui.Size()
-	workSpaceView, _ := uim.gui.SetView(constants.WorkSpace, 0, 0, maxX/2-padding, (maxY-(keyblidingHeight/2))/2)
+	workSpaceView, _ := uim.gui.SetView(constants.WorkSpace, 0, 0, maxX/2-padding, (maxY-(keybindingHeight/2))/2)
 	workSpaceView.Title = " Work Space "
 
 	DrawMenus(uim.gui, workSpaceView, constants.WorkSpace, uim.workspaceManager.GetWorkspaceNames())
@@ -34,7 +34,7 @@ func (uim *UiManagerImpl) WorkSpace() {
 
 func (uim *UiManagerImpl) Credential() {
 	maxX, maxY := uim.gui.Size()
-	credentialView, _ := uim.gui.SetView(constants.Credential, 0, (maxY-(keyblidingHeight/2))/2+padding, maxX/2-padding, maxY-3-padding)
+	credentialView, _ := uim.gui.SetView(constants.Credential, 0, (maxY-(keybindingHeight/2))/2+padding, maxX/2-padding, maxY-3-padding)
 	credentialView.Title = " Credential "
 
 	currentWorkspace := uim.GetCurrentSelectedWorkspace()
@@ -44,7 +44,7 @@ func (uim *UiManagerImpl) Credential() {
 
 func (uim *UiManagerImpl) Overview() {
 	maxX, maxY := uim.gui.Size()
-	overviewView, _ := uim.gui.SetView(constants.Overview, maxX/2+padding, 0, maxX-padding, maxY-keyblidingHeight-padding)
+	overviewView, _ := uim.gui.SetView(constants.Overview, maxX/2+padding, 0, maxX-padding, maxY-keybindingHeight-padding)
 	overviewView.Title = " Overview "
 
 	currentCredential := uim.GetCurrentSelectedCredential()
@@ -61,12 +61,12 @@ func (uim *UiManagerImpl) Overview() {
 
 }
 
-func (uim *UiManagerImpl) KeyblidingList() {
+func (uim *UiManagerImpl) KeybindingList() {
 	maxX, maxY := uim.gui.Size()
 
-	keyblidingListView, _ := uim.gui.SetView(constants.KeyblidingList, 0, maxY-3, maxX-padding, maxY-padding)
+	keybindingListView, _ := uim.gui.SetView(constants.KeybindingList, 0, maxY-3, maxX-padding, maxY-padding)
 
-	keyblidingListView.Clear()
+	keybindingListView.Clear()
 
 	var leftText string
 	rightText := "↓:l | ↑:h | ↓↓:j | ↑↑:k | Quit:q"
@@ -103,7 +103,7 @@ func (uim *UiManagerImpl) KeyblidingList() {
 
 	spaces := strings.Repeat(" ", spacesNeeded)
 
-	fmt.Fprintf(keyblidingListView, "\033[37m%s%s%s\033[0m\n", leftText, spaces, rightText)
+	fmt.Fprintf(keybindingListView, "\033[37m%s%s%s\033[0m\n", leftText, spaces, rightText)
 
 	// fmt.Println(currentView.Name())
 
@@ -113,7 +113,7 @@ func (uim *UiManagerImpl) Layout(g *gocui.Gui) error {
 	uim.WorkSpace()
 	uim.Credential()
 	uim.Overview()
-	uim.KeyblidingList()
+	uim.KeybindingList()
 
 	if uim.gui.CurrentView() == nil {
 		uim.gui.SetCurrentView(constants.WorkSpace)

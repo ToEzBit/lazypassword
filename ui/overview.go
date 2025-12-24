@@ -78,7 +78,7 @@ func DrawOverview(g *gocui.Gui, v *gocui.View, credential models.Credential) {
 
 }
 
-func IncressSelectedOverviewIdx() {
+func IncreaseSelectedOverviewIdx() {
 	if selectedOverviewIdx >= 4 {
 		return
 	}
@@ -86,7 +86,7 @@ func IncressSelectedOverviewIdx() {
 
 }
 
-func DecressSelectedOverviewIdx() {
+func DecreaseSelectedOverviewIdx() {
 	if selectedOverviewIdx <= 0 {
 		return
 	}

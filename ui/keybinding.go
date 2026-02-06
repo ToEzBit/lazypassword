@@ -47,6 +47,10 @@ func (uim *UiManagerImpl) SetupKeybindingGlobal() {
 	uim.gui.SetKeybinding("", 'q', gocui.ModNone, quit)
 }
 
+func (uim *UiManagerImpl) SetupKeybindingMasterPassword() {
+	uim.gui.SetKeybinding(constants.ModalMasterPassword, gocui.KeyEnter, gocui.ModNone, uim.handleMasterPasswordSubmit)
+}
+
 func (uim *UiManagerImpl) ClearKeybindingNavigation() {
 	uim.gui.DeleteKeybinding("", 'h', gocui.ModNone)
 	uim.gui.DeleteKeybinding("", 'l', gocui.ModNone)

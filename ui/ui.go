@@ -11,6 +11,7 @@ import (
 
 var padding = 1
 var keybindingHeight = 3
+var isUnlocked = false
 
 type UiManagerImpl struct {
 	gui              *gocui.Gui
@@ -92,6 +93,8 @@ func (uim *UiManagerImpl) KeybindingList() {
 		leftText = "Toggle-Tab : <tab>"
 	case constants.Overview:
 		leftText = "Copy : y | Back-to-Workspace : <esc>"
+	case constants.ModalMasterPassword:
+		leftText = "Unlock : <enter>"
 	default:
 		leftText = ""
 	}
@@ -111,16 +114,26 @@ func (uim *UiManagerImpl) KeybindingList() {
 
 }
 
+var modalShown = false
+
 func (uim *UiManagerImpl) Layout(g *gocui.Gui) error {
 	uim.WorkSpace()
 	uim.Credential()
 	uim.Overview()
 	uim.KeybindingList()
 
+	if !isUnlocked {
+		uim.openMasterPasswordModal(g)
+		if !modalShown {
+			uim.SetupKeybindingMasterPassword()
+			modalShown = true
+		}
+		return nil
+	}
+
 	if uim.gui.CurrentView() == nil {
 		uim.gui.SetCurrentView(constants.WorkSpace)
 	}
 
 	return nil
-
 }

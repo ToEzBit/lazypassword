@@ -6,6 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/jroimartin/gocui"
 	"github.com/samber/lo"
+	"github.com/toezbit/lazypassword/crypto"
 	"github.com/toezbit/lazypassword/file"
 	"github.com/toezbit/lazypassword/models"
 )
@@ -20,18 +21,38 @@ func NewWorkspaceManagerImpl(g *gocui.Gui) *WorkspaceManagerImpl {
 	}
 }
 
+var fileData models.FileData
 var workspaces []models.Workspace
 var loadedSuccessfully bool
 
 func init() {
-	workspaces, loadedSuccessfully = file.ReadFile()
+	fileData, loadedSuccessfully = file.ReadFile()
+	workspaces = fileData.Data
+
+	if loadedSuccessfully && fileData.Salt == "" {
+		salt, err := crypto.GenerateSalt()
+		if err == nil {
+			fileData.Salt = salt
+			fileData.Version = "1.0"
+		}
+	}
 }
 
 func Save() {
 	if !loadedSuccessfully {
 		return
 	}
-	file.WriteFile(workspaces)
+	fileData.Data = workspaces
+	file.WriteFile(fileData)
+}
+
+func GetFileData() models.FileData {
+	return fileData
+}
+
+func SetPasswordHash(hash string) {
+	fileData.PasswordHash = hash
+	Save()
 }
 
 func (vm *WorkspaceManagerImpl) GetWorkspaces() []models.Workspace {

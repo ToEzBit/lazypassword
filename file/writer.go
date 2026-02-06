@@ -10,14 +10,8 @@ import (
 	"github.com/toezbit/lazypassword/utils"
 )
 
-func WriteFile(data []models.Workspace) {
-
-	fileData := models.FileData{
-		Version: "1.0",
-		Data:    data,
-	}
-
-	jsonData, err := json.MarshalIndent(fileData, "", "")
+func WriteFile(fileData models.FileData) {
+	jsonData, err := json.MarshalIndent(fileData, "", "  ")
 
 	if err != nil {
 		fmt.Printf("Error marshaling JSON: %v\n", err)
@@ -57,6 +51,11 @@ func TestWriter() {
 
 	data = append(data, res)
 
-	WriteFile(data)
+	fileData := models.FileData{
+		Version: "1.0",
+		Salt:    "test-salt",
+		Data:    data,
+	}
 
+	WriteFile(fileData)
 }

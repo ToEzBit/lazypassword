@@ -15,4 +15,6 @@ const (
 
 	ModalConfirmDeleteWorkspace  = "modal-confirm-delete-workspce"
 	ModalConfirmDeleteCredential = "modal-confirm-delete-credential"
+
+	ModalMasterPassword = "modal-master-password"
 )

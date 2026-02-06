@@ -7,7 +7,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/jroimartin/gocui"
 	"github.com/toezbit/lazypassword/constants"
+	"github.com/toezbit/lazypassword/crypto"
 	"github.com/toezbit/lazypassword/models"
+	"github.com/toezbit/lazypassword/workspace"
 )
 
 func (uim *UiManagerImpl) openAddWorkspaceModal(g *gocui.Gui, v *gocui.View) error {
@@ -216,6 +218,56 @@ func (uim *UiManagerImpl) handleDeleteCredential(g *gocui.Gui, v *gocui.View) er
 	ClearSelectedCredentialIdx()
 
 	uim.closeConfirmDeleteCredentialModal(g, v)
+
+	return nil
+}
+
+func (uim *UiManagerImpl) openMasterPasswordModal(g *gocui.Gui) error {
+	maxX, maxY := g.Size()
+
+	modalMasterPassword, _ := g.SetView(constants.ModalMasterPassword, maxX/2-30, maxY/2-2, maxX/2+30, maxY/2)
+	modalMasterPassword.Title = " 🔐 Enter Master Password "
+	modalMasterPassword.Editable = true
+	modalMasterPassword.Mask = '*'
+
+	g.SetCurrentView(constants.ModalMasterPassword)
+
+	return nil
+}
+
+func (uim *UiManagerImpl) closeMasterPasswordModal(g *gocui.Gui, v *gocui.View) error {
+	g.DeleteView(constants.ModalMasterPassword)
+	isUnlocked = true
+	g.SetCurrentView(constants.WorkSpace)
+
+	return nil
+}
+
+func (uim *UiManagerImpl) handleMasterPasswordSubmit(g *gocui.Gui, v *gocui.View) error {
+	passwordInput := strings.TrimSpace(v.Buffer())
+
+	if passwordInput == "" {
+		return nil
+	}
+
+	fileData := workspace.GetFileData()
+
+	// First time: set password hash
+	if fileData.PasswordHash == "" {
+		hash := crypto.HashPassword(passwordInput, fileData.Salt)
+		workspace.SetPasswordHash(hash)
+		return uim.closeMasterPasswordModal(g, v)
+	}
+
+	// Verify password
+	if crypto.VerifyPassword(passwordInput, fileData.Salt, fileData.PasswordHash) {
+		return uim.closeMasterPasswordModal(g, v)
+	}
+
+	// Wrong password - clear input and show error
+	v.Clear()
+	v.SetCursor(0, 0)
+	v.Title = " ❌ Wrong Password - Try Again "
 
 	return nil
 }

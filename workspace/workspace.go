@@ -55,6 +55,16 @@ func SetPasswordHash(hash string) {
 	Save()
 }
 
+var encryptionKey []byte
+
+func SetEncryptionKey(key []byte) {
+	encryptionKey = key
+}
+
+func GetEncryptionKey() []byte {
+	return encryptionKey
+}
+
 func (vm *WorkspaceManagerImpl) GetWorkspaces() []models.Workspace {
 	return workspaces
 }

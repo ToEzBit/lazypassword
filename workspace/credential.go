@@ -4,6 +4,7 @@ import (
 	"slices"
 
 	"github.com/samber/lo"
+	"github.com/toezbit/lazypassword/crypto"
 	"github.com/toezbit/lazypassword/models"
 )
 
@@ -27,15 +28,19 @@ func CountCredential(workspaceId string) int {
 }
 
 func (wm *WorkspaceManagerImpl) AddCredential(workspaceId string, data models.Credential) {
-
 	_, targetWorkspaceIdx, _ := lo.FindIndexOf(workspaces, func(el models.Workspace) bool {
 		return el.Id == workspaceId
 	})
 
+	if data.Password != "" {
+		encrypted, err := crypto.Encrypt(data.Password, GetEncryptionKey())
+		if err == nil {
+			data.Password = encrypted
+		}
+	}
+
 	updatedCredentials := append(workspaces[targetWorkspaceIdx].Credentials, data)
-
 	workspaces[targetWorkspaceIdx].Credentials = updatedCredentials
-
 }
 
 func (wm *WorkspaceManagerImpl) DeleteCredential(workspaceId string, credentialId string) {

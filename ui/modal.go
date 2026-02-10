@@ -251,20 +251,20 @@ func (uim *UiManagerImpl) handleMasterPasswordSubmit(g *gocui.Gui, v *gocui.View
 	}
 
 	fileData := workspace.GetFileData()
+	key := crypto.DeriveKey(passwordInput, fileData.Salt)
 
-	// First time: set password hash
 	if fileData.PasswordHash == "" {
 		hash := crypto.HashPassword(passwordInput, fileData.Salt)
 		workspace.SetPasswordHash(hash)
+		workspace.SetEncryptionKey(key)
 		return uim.closeMasterPasswordModal(g, v)
 	}
 
-	// Verify password
 	if crypto.VerifyPassword(passwordInput, fileData.Salt, fileData.PasswordHash) {
+		workspace.SetEncryptionKey(key)
 		return uim.closeMasterPasswordModal(g, v)
 	}
 
-	// Wrong password - clear input and show error
 	v.Clear()
 	v.SetCursor(0, 0)
 	v.Title = " ❌ Wrong Password - Try Again "

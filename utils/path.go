@@ -13,7 +13,7 @@ func GetAppDirectoryPath() string {
 		return ""
 	}
 
-	return filepath.Join("./")
+	// return filepath.Join("./")
 	return filepath.Join(homeDir, ".local", "share", "lazypassword")
 
 }
